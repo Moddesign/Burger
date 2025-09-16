@@ -8,19 +8,33 @@
   body {
     margin: 0;
     font-family: Arial, sans-serif;
+    /* Moderner, sanfter Hintergrund */
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    min-height: 100vh;
   }
+
   /* Navbar */
   .navbar {
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.6);
     overflow: hidden;
     position: relative;
+    z-index: 10;
   }
+
   .navbar a {
     color: white;
     text-decoration: none;
     display: block;
     padding: 14px 20px;
+    font-weight: bold;
+    transition: background-color 0.3s;
   }
+
+  .navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
   /* Burger-Button */
   .burger {
     cursor: pointer;
@@ -30,7 +44,9 @@
     right: 20px;
     width: 30px;
     height: 25px;
+    z-index: 11;
   }
+
   .burger div {
     background-color: white;
     height: 4px;
@@ -38,58 +54,158 @@
     border-radius: 2px;
     transition: 0.3s;
   }
+
   /* Menü */
   .menu {
     display: none;
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.6);
   }
+
   .menu a {
-    border-top: 1px solid #444;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
+
   /* Menü anzeigen wenn aktiv */
   .menu.active {
     display: block;
   }
 
   /* Größere Bildschirme */
-  @media(min-width: 600px) {
+  @media (min-width: 600px) {
     .burger {
       display: none;
     }
+
     .menu {
       display: flex !important;
       background-color: transparent;
+      justify-content: center;
     }
+
     .menu a {
       border: none;
+      padding: 20px 30px;
       color: white;
-      padding: 14px 20px;
     }
+
+    .menu a:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+    }
+  }
+
+  /* Inhalt */
+  main {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  section {
+    display: none;
+  }
+
+  section.active {
+    display: block;
+  }
+
+  h2 {
+    margin-top: 0;
+    border-bottom: 2px solid white;
+    padding-bottom: 6px;
+  }
+
+  p {
+    line-height: 1.6;
   }
 </style>
 </head>
 <body>
 
 <div class="navbar">
-  <div class="burger" id="burger">
+  <div class="burger" id="burger" aria-label="Menü öffnen" role="button" tabindex="0">
     <div></div>
     <div></div>
     <div></div>
   </div>
-  <nav class="menu" id="menu">
-    <a href="#">Startseite</a>
-    <a href="#">Über Uns</a>
-    <a href="#">Leistungen</a>
-    <a href="#">Kontakt</a>
+  <nav class="menu" id="menu" role="navigation" aria-label="Hauptnavigation">
+    <a href="#" data-section="startseite">Startseite</a>
+    <a href="#" data-section="ueber-uns">Über Uns</a>
+    <a href="#" data-section="leistungen">Leistungen</a>
+    <a href="#" data-section="kontakt">Kontakt</a>
   </nav>
 </div>
+
+<main>
+  <section id="startseite" class="active" tabindex="0">
+    <h2>Willkommen auf unserer Startseite</h2>
+    <p>Hier findest du eine moderne Webseite mit einem praktischen Burger-Menü. Unser Ziel ist es, dir die besten Informationen übersichtlich und ansprechend zu präsentieren.</p>
+  </section>
+
+  <section id="ueber-uns" tabindex="0">
+    <h2>Über Uns</h2>
+    <p>Wir sind ein engagiertes Team von Webentwicklern und Designern, die moderne und benutzerfreundliche Webseiten gestalten. Deine Zufriedenheit steht bei uns an erster Stelle.</p>
+  </section>
+
+  <section id="leistungen" tabindex="0">
+    <h2>Unsere Leistungen</h2>
+    <ul>
+      <li>Individuelle Webentwicklung</li>
+      <li>Responsive Design für alle Geräte</li>
+      <li>SEO-Optimierung für bessere Sichtbarkeit</li>
+      <li>Wartung und Support</li>
+    </ul>
+  </section>
+
+  <section id="kontakt" tabindex="0">
+    <h2>Kontakt</h2>
+    <p>Hast du Fragen oder möchtest du ein Projekt besprechen? Kontaktiere uns einfach per E-Mail oder Telefon.</p>
+    <p><strong>E-Mail:</strong> kontakt@beispiel.de</p>
+    <p><strong>Telefon:</strong> +49 123 4567890</p>
+  </section>
+</main>
 
 <script>
   const burger = document.getElementById('burger');
   const menu = document.getElementById('menu');
+  const links = menu.querySelectorAll('a');
+  const sections = document.querySelectorAll('main section');
 
+  // Burger-Menü toggeln
   burger.addEventListener('click', () => {
     menu.classList.toggle('active');
+  });
+
+  // Menü-Link Klick: Inhalt wechseln + Menü schließen (mobil)
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = link.getAttribute('data-section');
+
+      // Alle Abschnitte verstecken
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      // Ziel-Abschnitt zeigen
+      const activeSection = document.getElementById(target);
+      if (activeSection) {
+        activeSection.classList.add('active');
+        activeSection.focus();
+      }
+
+      // Menü schließen (mobil)
+      menu.classList.remove('active');
+    });
+  });
+
+  // Optional: Burger mit Enter oder Space bedienbar machen (Barrierefreiheit)
+  burger.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      menu.classList.toggle('active');
+    }
   });
 </script>
 
