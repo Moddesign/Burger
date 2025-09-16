@@ -4,6 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Burger Menü Beispiel mit Flip-Hintergrund</title>
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#764ba2" />
+
 <style>
   body {
     margin: 0;
@@ -246,7 +251,17 @@
 
   // Initial Hintergrund setzen
   main.style.setProperty('--bg-image', backgrounds['startseite']);
+
+  // Service Worker Registrierung (für PWA)
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('Service Worker registriert:', reg.scope))
+        .catch(err => console.log('Service Worker Registrierung fehlgeschlagen:', err));
+    });
+  }
 </script>
 
 </body>
 </html>
+
