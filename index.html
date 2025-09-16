@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Burger Menü Beispiel</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  /* Navbar */
+  .navbar {
+    background-color: #333;
+    overflow: hidden;
+    position: relative;
+  }
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 14px 20px;
+  }
+  /* Burger-Button */
+  .burger {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: 30px;
+    height: 25px;
+  }
+  .burger div {
+    background-color: white;
+    height: 4px;
+    margin: 5px 0;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+  /* Menü */
+  .menu {
+    display: none;
+    background-color: #333;
+  }
+  .menu a {
+    border-top: 1px solid #444;
+  }
+  /* Menü anzeigen wenn aktiv */
+  .menu.active {
+    display: block;
+  }
+
+  /* Größere Bildschirme */
+  @media(min-width: 600px) {
+    .burger {
+      display: none;
+    }
+    .menu {
+      display: flex !important;
+      background-color: transparent;
+    }
+    .menu a {
+      border: none;
+      color: white;
+      padding: 14px 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="burger" id="burger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <nav class="menu" id="menu">
+    <a href="#">Startseite</a>
+    <a href="#">Über Uns</a>
+    <a href="#">Leistungen</a>
+    <a href="#">Kontakt</a>
+  </nav>
+</div>
+
+<script>
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+
+  burger.addEventListener('click', () => {
+    menu.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>
