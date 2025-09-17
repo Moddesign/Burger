@@ -9,21 +9,22 @@
   <style>
     :root{
       --bg1:#667eea; --bg2:#764ba2; --accent:#ffdd57; --card-bg:rgba(0,0,0,0.45); --glass: rgba(255,255,255,0.03);
-      --gap:20px; --radius:12px; --content-padding:28px;
-      --max-width:1200px;
+      --gap:20px; --radius:12px; --content-padding:28px; --max-width:1200px;
+      --text:#ffffff; --muted:rgba(255,255,255,0.82);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body { margin: 0; font-family: Inter, system-ui, Arial, "Helvetica Neue", sans-serif; color: #ffffff; min-height: 100vh; background: linear-gradient(135deg,var(--bg1),var(--bg2)); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-
+    body { margin: 0; font-family: Inter, system-ui, Arial, "Helvetica Neue", sans-serif; color: var(--text); min-height: 100vh;
+           background: linear-gradient(135deg,var(--bg1),var(--bg2)); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    a{color:inherit}
     .container{width:100%;padding:0 24px;margin:0 auto;max-width:var(--max-width)}
-    header.navbar{width:100%;position:sticky;top:0;backdrop-filter: blur(6px)}
-    .navbar { background-color: rgba(0, 0, 0, 0.45); overflow: hidden; position: relative; z-index: 1000; border-bottom:1px solid rgba(255,255,255,0.04) }
+    header.navbar{width:100%;position:sticky;top:0;backdrop-filter: blur(6px); z-index:1100}
+    .navbar { background-color: rgba(0, 0, 0, 0.45); overflow: hidden; position: relative; border-bottom:1px solid rgba(255,255,255,0.04) }
     .brand{display:flex;align-items:center;gap:12px;padding:14px 0}
-    .brand h1{font-size:1.05rem;margin:0;letter-spacing:0.6px}
+    .brand h1{font-size:1.05rem;margin:0;letter-spacing:0.3px}
     .navbar .menu { display: none; background-color: transparent; }
     .navbar .menu a { color: white; text-decoration: none; display: block; padding: 12px 14px; font-weight:600; }
-    .burger { cursor: pointer; display: block; position: absolute; top: 12px; right: 20px; width: 34px; height: 26px; z-index: 1100; }
+    .burger { cursor: pointer; display: block; position: absolute; top: 12px; right: 20px; width: 34px; height: 26px; z-index: 1200; }
     .burger div { background-color: white; height: 4px; margin: 4px 0; border-radius:3px; transition: transform 0.25s ease; }
     .menu.active{display:block}
     @media (min-width: 760px){
@@ -34,15 +35,15 @@
 
     main { width:100%; margin: 28px 0; padding: 0; position: relative; overflow: visible; }
     .panel { margin: 0 auto; background: var(--card-bg); padding: var(--content-padding); border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,0.35); max-width:var(--max-width); }
-    main::before { content: ""; position: absolute; left:0; right:0; top:0; height:320px; background-size: cover; background-position: center; background-repeat: no-repeat; filter: brightness(0.55); z-index: -1; transition: background-image 0.6s ease-in-out; background-image: var(--bg-image, url('https://images.unsplash.com/photo-1498050108023-c5249f4df085')); border-bottom-left-radius:30px; border-bottom-right-radius:30px; }
+    main::before { content: ""; position: absolute; left:0; right:0; top:0; height:360px; background-size: cover; background-position: center; background-repeat: no-repeat; filter: brightness(0.56); z-index: -1; transition: background-image 0.6s ease-in-out; background-image: var(--bg-image, url('https://images.unsplash.com/photo-1498050108023-c5249f4df085')); border-bottom-left-radius:30px; border-bottom-right-radius:30px; }
 
-    section { display: none; backface-visibility: hidden; transform-style: preserve-3d; }
+    section { display: none; backface-visibility: hidden; transform-style: preserve-3d; padding-bottom:8px; }
     section.active { display: block; }
     @keyframes flipIn { 0% { transform: rotateY(-90deg); opacity: 0; } 100% { transform: rotateY(0deg); opacity: 1; } }
     section.flip-animation { animation: flipIn 0.45s forwards; }
     h2 { margin-top: 0; border-bottom: 2px solid rgba(255,255,255,0.08); padding-bottom: 8px; }
-    p, ul { line-height: 1.6; color: rgba(255,255,255,0.95) }
-    .muted { color: rgba(255,255,255,0.82) }
+    p, ul { line-height: 1.6; color: var(--text) }
+    .muted { color: var(--muted) }
 
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--gap)}
     .card{background:var(--glass);padding:18px;border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
@@ -54,7 +55,6 @@
     .btn-primary{background:var(--accent);color:#111}
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);color:white}
 
-    /* content helpers */
     .tag { display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);font-weight:600;margin-right:8px;font-size:0.86rem }
     .meta { font-size:0.9rem;opacity:0.85 }
     .hr { height:1px;background:rgba(255,255,255,0.06);margin:18px 0;border-radius:2px }
@@ -71,13 +71,17 @@
     .lead { font-size:1.05rem; max-width:900px; margin:0 auto; color:rgba(255,255,255,0.95) }
 
     a:focus, button:focus, input:focus, textarea:focus, .card:focus{outline:3px solid rgba(255,255,255,0.12);outline-offset:3px}
-
     blockquote{margin:10px 0;padding:12px;border-left:4px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);border-radius:8px}
     table{width:100%;border-collapse:collapse}
     table td, table th{padding:10px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left}
-
-    /* responsive image handling in content */
     .cover { width:100%;height:320px;object-fit:cover;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,0.35) }
+
+    /* extra content spacing to avoid empty feeling */
+    .big-block { padding:22px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; margin-top:12px }
+    .two-col { display:grid; grid-template-columns: 1fr 380px; gap:18px }
+    @media (max-width:980px){ .two-col{grid-template-columns:1fr} }
+    .small { font-size:0.95rem; color:var(--muted) }
+    .social-links a{display:inline-block;margin-right:10px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.03)}
   </style>
 </head>
 <body>
@@ -96,6 +100,8 @@
         <a href="#" data-section="blog">Blog</a>
         <a href="#" data-section="faq">FAQ</a>
         <a href="#" data-section="kontakt">Kontakt</a>
+        <a href="#" data-section="karriere">Karriere</a>
+        <a href="#" data-section="ressourcen">Ressourcen</a>
         <a href="#" data-section="impressum">Impressum</a>
         <a href="#" data-section="datenschutz">Datenschutz</a>
         <a href="#" data-section="agb">AGB</a>
@@ -130,7 +136,7 @@
             <img src="https://img.icons8.com/ios-filled/100/ffffff/source-code.png" alt="Webentwicklung" width="64" height="64" style="opacity:0.95">
             <h3>Webentwicklung</h3>
             <p class="muted">Von statischen Unternehmensseiten über Headless-CMS-Lösungen bis zu komplexen Web-Apps mit APIs — wir entwickeln wartbaren Code, setzen auf Performance und halten technische Schulden gering.</p>
-            <p class="muted" style="margin-top:6px">Technologien: JavaScript/TypeScript, React, Svelte, Node.js, Serverless, CDNs, CI/CD.</p>
+            <p class="muted" style="margin-top:6px">Technologien: JavaScript/TypeScript, React, Svelte, Node.js, Serverless, CI/CD.</p>
           </div>
 
           <div class="card" role="button" tabindex="0" data-section="leistungen">
@@ -150,23 +156,44 @@
 
         <div class="hr"></div>
 
-        <h3 style="margin-bottom:6px">Kurz — Unser Angebot</h3>
-        <p class="muted">Toshiweb bietet Komplettleistungen: Strategie-Workshops, UX & Design, Entwicklung, Testing, Launch und technisches/inhaltliches Retainer-Support. Flexible Pakete für Startups, Mittelstand und Agenturpartner.</p>
+        <div class="two-col">
+          <div>
+            <h3>Was uns auszeichnet</h3>
+            <ul class="muted">
+              <li><strong>Messbare Ergebnisse:</strong> Wir setzen KPIs, tracken Fortschritt und optimieren basierend auf Daten.</li>
+              <li><strong>Wartbarkeit:</strong> Klar strukturierter Code, Tests und einfache Deploy-Pipelines.</li>
+              <li><strong>Verständliche Kommunikation:</strong> Keine Fachspezifika ohne Erklärung — regelmäßige Demos & Dokumentation.</li>
+              <li><strong>Fairness:</strong> Transparente Angebote, faire Stundensätze und klare Priorisierung.</li>
+            </ul>
 
-        <div class="hr"></div>
+            <div class="hr"></div>
 
-        <h3 style="margin-bottom:8px">Erste Schritte</h3>
-        <ol class="muted">
-          <li><strong>Kostenloses Erstgespräch:</strong> 30 Minuten, Zieldefinition & Umfang.</li>
-          <li><strong>Projektbriefing:</strong> Angebot, Zeitplan und MVP-Definition.</li>
-          <li><strong>Sprintstart:</strong> Zweiwöchige Sprints, regelmäßige Demos.</li>
-        </ol>
+            <h3>Schnelle Beispiele</h3>
+            <ul class="muted">
+              <li>Landingpage für lokale Dienstleister: Live in 10 Tagen, mit Kontakttracking.</li>
+              <li>Headless-Shop: schnelle Checkout-Optimierung + Analyse.</li>
+              <li>Internationale Corporate-Site mit Content-Strategie.</li>
+            </ul>
+          </div>
+
+          <aside class="big-block">
+            <h4 style="margin:0 0 8px 0">Sichtbarkeit verbessern — 3-Minuten-Checkliste</h4>
+            <ol class="small muted">
+              <li>Ist deine Seite mobilfreundlich? Test: Ladezeit < 3s auf Mobile.</li>
+              <li>Hast du klare CTAs auf jeder relevanten Seite (Kontakt, Angebot)?</li>
+              <li>Tracking & Goals im Analytics-Tool eingerichtet (Conversions messen).</li>
+              <li>Technische Basis: HTTPS, saubere Meta-Tags, Sitemap & robots.txt.</li>
+            </ol>
+            <p class="small muted" style="margin-top:10px">Wenn du willst, machen wir den Check im Erstgespräch kostenfrei.</p>
+          </aside>
+        </div>
+
       </section>
 
       <!-- ÜBER UNS -->
       <section id="ueber-uns" tabindex="0">
         <h2>Über Toshiweb</h2>
-        <p class="muted">Toshiweb ist eine Boutique-Agentur mit Sitz in Musterstadt. Wir kombinieren strategische Beratung mit technischem Fokus — so entstehen Produkte, die nachhaltig funktionieren und messbare Werte liefern.</p>
+        <p class="muted">Toshiweb ist eine Boutique-Agentur mit Sitz in Musterstadt. Wir kombinieren strategische Beratung mit technischem Fokus — so entstehen Produkte, die nachhaltig funktionieren und messbare Werte liefern. Unsere Arbeit richtet sich an Unternehmer:innen, die Wert auf Qualität, Klarheit und langfristigen Erfolg legen.</p>
 
         <div class="grid" style="margin-top:12px">
           <div class="card">
@@ -176,7 +203,7 @@
 
           <div class="card">
             <h3>Unser Ansatz</h3>
-            <p class="muted">Agile Arbeitsweise, iterative Releases, messbare Ziele. Wir liefern in kleinen, überprüfbaren Schritten und priorisieren das, was echten Nutzerwert schafft.</p>
+            <p class="muted">Agile Arbeitsweise, iterative Releases, messbare Ziele. Wir liefern in kleinen, überprüfbaren Schritten und priorisieren das, was echten Nutzerwert schafft. Qualität vor Schnellschuss.</p>
           </div>
         </div>
 
@@ -186,19 +213,19 @@
         <div class="grid" style="margin-top:12px">
           <div class="card">
             <strong>Max Mustermann</strong>
-            <p class="muted">Gründer & Projektleitung — Strategie, Beratung, Kundenkommunikation. Erfahrung in mehreren internationalen Digitalprojekten.</p>
+            <p class="muted">Gründer & Projektleitung — Strategie, Beratung, Kundenkommunikation. Verantwortet Planung, Roadmaps und Delivery.</p>
           </div>
           <div class="card">
             <strong>Anna Beispiel</strong>
-            <p class="muted">Lead Designerin — UX, Interface, Design Systems. Schwerpunkt: nutzerfreundliche, barrierearme Interfaces.</p>
+            <p class="muted">Lead Designerin — UX, Interface, Design Systems. Fokus: Barrierearmut und Interaktionsqualität.</p>
           </div>
           <div class="card">
             <strong>Jonas Dev</strong>
             <p class="muted">Lead Developer — Frontend/Backend, Deployment, Performance-Engineering. Leidenschaft für sauberen, testbaren Code.</p>
           </div>
           <div class="card">
-            <strong>Freelancer-Netzwerk</strong>
-            <p class="muted">SEO-, Content- und Backend-Spezialisten runden das Team nach Bedarf ab.</p>
+            <strong>Netzwerkpartner</strong>
+            <p class="muted">SEO-, Content- und Backend-Spezialisten ergänzen das Team projektbezogen.</p>
           </div>
         </div>
 
@@ -209,154 +236,230 @@
           <li>Transparenz: Klare Angebote, nachvollziehbare Arbeitspakete.</li>
           <li>Qualität: Gute Architekturen statt Quick-Fixes.</li>
           <li>Nachhaltigkeit: Software, die langfristig wartbar ist.</li>
+          <li>Respekt: Wertschätzende Zusammenarbeit mit Kunden & Partnern.</li>
         </ul>
       </section>
 
       <!-- LEISTUNGEN -->
       <section id="leistungen" tabindex="0">
-        <h2>Leistungen — Was wir konkret anbieten</h2>
-        <p class="muted">Ein übersichtliches Portfolio: von Beratung bis Betrieb. Jedes Paket wird an Ihre Anforderungen angepasst.</p>
+        <h2>Leistungen — Detailübersicht</h2>
+        <p class="muted">Ein ausführliches Angebot, das sich an Ihren Bedürfnissen orientiert. Hier sind die Schwerpunkte mit konkreten Leistungen.</p>
 
         <div class="grid" style="margin-top:12px">
           <div class="card">
             <h3>Strategie & Forschung</h3>
-            <p class="muted">Workshops, Wettbewerbsanalyse, Zielgruppen- und Content-Strategie. Ergebnis: klares Pflichtenheft und Prioritäten-Matrix.</p>
+            <p class="muted">Analyse, Workshops und Zieldefinition — damit jedes Feature notwendige Nutzer- oder Geschäftsziele erfüllt.</p>
             <ul class="muted">
-              <li>Stakeholder-Workshop</li>
+              <li>Business & Product Workshops</li>
               <li>User Research & Interviews</li>
               <li>SEO- & Content-Audit</li>
+              <li>Priorisierungs-Matrix (MoSCoW)</li>
             </ul>
           </div>
 
           <div class="card">
-            <h3>UX & Design</h3>
-            <p class="muted">Wireframes, klickbare Prototypen, UI-Design und Styleguide. Fokus auf einfache Nutzerführung, Barrierefreiheit und Performance.</p>
+            <h3>UX, UI & Prototyping</h3>
+            <p class="muted">Vom groben Flow bis zum finalen Designsystem — interaktive Prototypen beschleunigen Entscheidungen.</p>
             <ul class="muted">
-              <li>Low- & High-Fidelity Prototyp</li>
-              <li>Designsystem & Komponenten</li>
-              <li>Accessibility Checklist</li>
+              <li>Wireframes & Klickbare Prototypen</li>
+              <li>Designsystem & Komponentenbibliothek</li>
+              <li>Accessibility-Review (WCAG-Checkliste)</li>
             </ul>
           </div>
 
           <div class="card">
-            <h3>Entwicklung & Betrieb</h3>
-            <p class="muted">Frontend, Backend, APIs, E-Commerce, Headless-CMS, CI/CD, Hosting und Monitoring — alles aus einer Hand oder in enger Zusammenarbeit mit Ihrer IT.</p>
+            <h3>Frontend & Backend</h3>
+            <p class="muted">Modulare Architektur, performante Frontends und skalierbare Server-APIs.</p>
             <ul class="muted">
-              <li>Performance-Optimierung</li>
-              <li>Automatisierte Tests & Deployments</li>
-              <li>Backup & Security</li>
+              <li>Jamstack / SSR / SPA je nach Use-Case</li>
+              <li>Headless CMS Integration</li>
+              <li>API-Design & Auth</li>
+              <li>Automatisierte Tests & CI/CD</li>
             </ul>
           </div>
 
           <div class="card">
-            <h3>SEO & Wachstum</h3>
-            <p class="muted">Technisches SEO, Content-Strategie, Crawling-Optimierung, Conversion-Optimierung und kontinuierliches Monitoring.</p>
+            <h3>Hosting, Wartung & Support</h3>
+            <p class="muted">Betrieb und Sicherheit — wir übernehmen Monitoring, Backups und schnelle Fehlerbehebung.</p>
             <ul class="muted">
-              <li>Keyword-Research</li>
-              <li>On-Page-Optimierung</li>
-              <li>Reporting & Dashboards</li>
+              <li>Managed Hosting & Backups</li>
+              <li>Security-Monitoring & Patches</li>
+              <li>Retainer & SLA-Optionen</li>
             </ul>
           </div>
         </div>
 
         <div class="hr"></div>
 
-        <h3>Preise & Pakete (Beispiele)</h3>
+        <h3>Prozess — einfach & transparent</h3>
+        <ol class="muted">
+          <li>Kickoff & Zieldefinition</li>
+          <li>Prototyping & User-Feedback</li>
+          <li>Implementierung in Sprints</li>
+          <li>Test, Launch & Monitoring</li>
+          <li>Wartung und Weiterentwicklung</li>
+        </ol>
+
+        <div class="hr"></div>
+
+        <h3>Preismodelle</h3>
+        <p class="muted">Wir bieten Festpreise für klar definierte Leistungen, Time & Materials für flexible Projekte und Retainer für kontinuierliche Betreuung.</p>
+
         <table class="muted" aria-label="Preistabelle">
-          <thead><tr><th>Leistung</th><th>Typischer Umfang</th><th>Preis (ab)</th></tr></thead>
+          <thead><tr><th>Plan</th><th>Inhalt</th><th>Preis (ab)</th></tr></thead>
           <tbody>
-            <tr><td>Starter-Website</td><td>5–10 Seiten, CMS, Kontaktformular</td><td>2.500 EUR</td></tr>
-            <tr><td>Business-Website</td><td>Mehrsprachig, SEO-Setup, interne CMS-Schulung</td><td>6.000–12.000 EUR</td></tr>
-            <tr><td>Webapp / E-Commerce</td><td>API-Integration, Checkout, Auth</td><td>ab 15.000 EUR</td></tr>
+            <tr><td>Starter</td><td>Landingpage, 1 Formular, CMS-Basis</td><td>2.500 EUR</td></tr>
+            <tr><td>Business</td><td>Mehrseiten-Website, SEO-Setup, DSGVO</td><td>6.000–12.000 EUR</td></tr>
+            <tr><td>Scale</td><td>Webapp / E-Commerce, API Integrationen</td><td>ab 15.000 EUR</td></tr>
           </tbody>
         </table>
-        <p class="muted" style="margin-top:10px">Preise dienen zur Orientierung. Konkretes Angebot nach Briefing.</p>
+
       </section>
 
       <!-- REFERENZEN -->
       <section id="referenzen" tabindex="0">
-        <h2>Referenzen & Fallstudien</h2>
-        <p class="muted">Auswahl an Projekten mit Zielen, Maßnahmen und Ergebnissen. Gerne stellen wir vollständige Case Studies auf Anfrage vor.</p>
+        <h2>Referenzen & Case Studies</h2>
+        <p class="muted">Hier siehst du kompakte Fallstudien mit Ziel, Maßnahmen und Resultaten. Vollständige Case Studies schicken wir auf Anfrage.</p>
 
         <div class="grid" style="margin-top:12px">
           <div class="card">
-            <strong>Projekt: Shopboost — E-Commerce Relaunch</strong>
-            <p class="muted">Ziel: bessere Conversion und schnellere Ladezeiten. Maßnahmen: Headless-Architektur, optimierter Checkout, CDN & Bildoptimierung. Ergebnis: +35% Conversion in 3 Monaten, LCP < 1.8s.</p>
-            <p class="muted">Leistungen: UX-Redesign, Implementierung, Monitoring.</p>
+            <strong>Shopboost — E-Commerce Relaunch</strong>
+            <p class="muted">Ziel: bessere Conversion & Performance. Maßnahmen: Headless-Architektur, optimierter Checkout, Bildoptimierung, CDN. Ergebnis: +35% Conversion in 3 Monaten, LCP < 1.8s.</p>
+            <p class="muted">Leistungen: UX-Redesign, Implementierung, Performance-Monitoring.</p>
+            <p class="small muted">Technologien: React, Node.js, Vercel, Strapi.</p>
           </div>
 
           <div class="card">
-            <strong>Projekt: Corporate One — Internationaler Relaunch</strong>
-            <p class="muted">Ziel: bessere Auffindbarkeit in DE/EN, klare Struktur für internationale Nutzer. Maßnahmen: strukturierte Mehrsprachigkeit, hreflang, technisches SEO. Ergebnis: sichtbare Verbesserungen im organischen Traffic.</p>
+            <strong>Corporate One — International</strong>
+            <p class="muted">Ziel: Sichtbarkeit DE/EN & einfache Contentpflege. Maßnahmen: hreflang, strukturierte Inhalte, Redaktionsanleitung. Ergebnis: organischer Traffic +42% (6 Monate).</p>
+            <p class="small muted">Technologien: Static site + Headless CMS, CDN, SEO-Optimierung.</p>
           </div>
 
           <div class="card">
-            <strong>Projekt: Local Service — Lead-Gen Landingpage</strong>
-            <p class="muted">Ziel: mehr qualifizierte Anfragen. Maßnahmen: Funnel-Optimierung, A/B-Tests, lokale SEO. Ergebnis: +60% Anfragen in 8 Wochen.</p>
+            <strong>Local Service — Lead Gen</strong>
+            <p class="muted">Ziel: mehr qualifizierte Anfragen. Maßnahmen: Zielgruppenspezifische Landingpage, A/B-Test CTAs, lokales SEO. Ergebnis: +60% Leads in 8 Wochen.</p>
           </div>
         </div>
 
         <div class="hr"></div>
 
         <h3>Kundenstimmen</h3>
-        <blockquote>"Toshiweb hat uns schnell, pragmatisch und professionell durch den Relaunch geführt. Resultate sprechen für sich." — E. Kunde, CEO</blockquote>
-        <blockquote>"Technisch sauber, kommunikativ stark — klare Empfehlung für mittelständische Projekte." — M. Kunde, Marketing</blockquote>
+        <blockquote>"Toshiweb hat unseren Relaunch zuverlässig umgesetzt — termintreu, technisch sauber und mit klaren Ergebnissen." — E. Kunde, CEO</blockquote>
+        <blockquote>"Kommunikation super, Ergebnisse messbar — wir arbeiten seitdem gemeinsam an Weiterentwicklung." — M. Kunde, Marketing</blockquote>
       </section>
 
       <!-- BLOG -->
       <section id="blog" tabindex="0">
-        <h2>Blog & Insights</h2>
-        <p class="muted">Praktische Artikel und Checklisten zu Web, UX und SEO — kurz, prägnant und umsetzbar.</p>
+        <h2>Blog & Lernmaterial</h2>
+        <p class="muted">Kurzartikel, Anleitungen und Checklisten — praktisch, umgesetzt und ohne viel Theorie.</p>
 
         <div class="grid" style="margin-top:12px">
-          <div class="card">
-            <strong>Wie man SEO richtig plant</strong>
-            <p class="muted">Eine Schritt-für-Schritt-Anleitung: technische Basis, Content-Priorisierung, Monitoring & KPIs. (Lesezeit: ~6 Min)</p>
-            <p class="muted">Kernaussage: Beginne technisch sauber, konzentriere Dich dann auf Content mit Nutzerintention.</p>
-          </div>
+          <article class="card">
+            <h3>Wie man SEO richtig plant</h3>
+            <p class="muted">Schritt-für-Schritt: technische Basis, Content-Priorisierung, KPIs & Reporting. Lesezeit: ~6 Min.</p>
+            <p class="small muted">Kernaussage: Technik zuerst, dann Content mit Nutzerintention.</p>
+          </article>
 
-          <div class="card">
-            <strong>Mobile-first Design: Prinzipien & Checkliste</strong>
-            <p class="muted">Mobile zuerst bedeutet Entscheidungen für eingeschränkte Ressourcen – weniger Komplexität, größere Touch-Flächen, Performance-Budget. (Lesezeit: ~5 Min)</p>
-          </div>
+          <article class="card">
+            <h3>Mobile-first Design — Prinzipien</h3>
+            <p class="muted">Designentscheidungen für begrenzte Ressourcen: Performance-Budget, Priorisierung, Interaktionsflächen. Lesezeit: ~5 Min.</p>
+          </article>
 
-          <div class="card">
-            <strong>Security-Basics: Was jede Website braucht</strong>
-            <p class="muted">Kurz-Guide zu HTTPS, CSP, HSTS und Backup-Strategien. Praktische Maßnahmen für kleine Teams. (Lesezeit: ~7 Min)</p>
-          </div>
+          <article class="card">
+            <h3>Security-Basics für kleine Teams</h3>
+            <p class="muted">HTTPS, CSP, regelmäßige Updates, Backups — eine leicht umsetzbare Checkliste. Lesezeit: ~7 Min.</p>
+          </article>
         </div>
 
         <div class="hr"></div>
 
-        <h3 style="margin-bottom:8px">Nächster Webinar-Termin</h3>
-        <p class="muted">Thema: "Schneller Relaunch mit geringem Risiko" — Anmeldung per Kontaktformular</p>
+        <h3>Newsletter</h3>
+        <p class="muted">Einmal im Quartal senden wir praxisnahe Insights, Tool-Checks und Einladungen zu Webinaren. Anmeldung per Kontaktformular mit Betreff "Newsletter".</p>
       </section>
 
       <!-- FAQ -->
       <section id="faq" tabindex="0">
         <h2>FAQ — Häufige Fragen</h2>
 
-        <details class="card"><summary><strong>Wie lange dauert ein Projekt?</strong></summary>
-          <p class="muted">Kleine Websites: 2–6 Wochen. Mittelgroße Projekte: 6–12 Wochen. Komplexe Webapps: 3 Monate oder mehr. Wir arbeiten in Sprints (typisch 2 Wochen) und liefern regelmäßig lauffähige Ergebnisse.</p>
+        <details class="card">
+          <summary><strong>Wie lange dauert ein Projekt?</strong></summary>
+          <p class="muted">Kleine Websites: 2–6 Wochen. Mittelgroße Projekte: 6–12 Wochen. Komplexe Webapps: 3 Monate oder mehr. Wir arbeiten in Sprints und zeigen regelmäßig lauffähige Ergebnisse.</p>
         </details>
 
-        <details class="card"><summary><strong>Was kostet eine Website?</strong></summary>
-          <p class="muted">Einfache Seiten ab ~2.500 EUR. Umfang und Integrationen bestimmen den Endpreis. Gern erstellen wir ein transparentes Angebot mit Aufschlüsselung.</p>
+        <details class="card">
+          <summary><strong>Was kostet eine Website?</strong></summary>
+          <p class="muted">Einfache Seiten ab ~2.500 EUR. Umfang und Integrationen bestimmen den endgültigen Preis. Wir erstellen transparente Angebote mit Leistungsaufstellung.</p>
         </details>
 
-        <details class="card"><summary><strong>Was brauche ich für den Start?</strong></summary>
-          <p class="muted">Ein Ansprechpartner, Zieldefinition, vorhandene Inhalte (Logo, Texte, Bilder) und Zugang zu Domain/Hosting falls vorhanden. Wir unterstützen beim Erstellen fehlender Inhalte.</p>
+        <details class="card">
+          <summary><strong>Benötige ich Fotos und Texte?</strong></summary>
+          <p class="muted">Vorhandene Inhalte sind ideal, wir bieten aber Content-Support: Fotografen, Texter und Bildbearbeitung. Zusammenarbeit möglich.</p>
         </details>
 
-        <details class="card"><summary><strong>Wie geht ihr mit Datenschutz um?</strong></summary>
-          <p class="muted">Cookies und Tracking nur mit Einwilligung; wir beraten zu DSGVO-konformen Implementierungen und stellen notwendige Texte als Vorlagen bereit. Rechtliche Prüfung durch externe Datenschutzexperten empfohlen.</p>
+        <details class="card">
+          <summary><strong>Unterstützt ihr DSGVO?</strong></summary>
+          <p class="muted">Ja — Cookie-Consent, Form-Service-Optionen und Hinweise. Wir beraten zur Umsetzung; rechtliche Prüfung durch Datenschutzexperten empfohlen.</p>
         </details>
+
+        <details class="card">
+          <summary><strong>Was ist included im Wartungspaket?</strong></summary>
+          <p class="muted">Regelmäßige Updates, tägliche Backups, Security-Checks, Performance-Monitoring und definierte Reaktionszeiten (je nach Plan).</p>
+        </details>
+      </section>
+
+      <!-- RESSOURCEN -->
+      <section id="ressourcen" tabindex="0">
+        <h2>Ressourcen & Downloads</h2>
+        <p class="muted">Praktische Vorlagen & Checklisten zum Download — nützliche Hilfsmittel für den Projektstart.</p>
+
+        <div class="grid" style="margin-top:12px">
+          <div class="card">
+            <h3>Projekt-Briefing Vorlage</h3>
+            <p class="muted">PDF-Vorlage für Anforderungsspezifikation und Scope-Definition (kostenfrei).</p>
+            <p class="small muted">Format: PDF — ideal für Kickoffs.</p>
+          </div>
+
+          <div class="card">
+            <h3>SEO Checkliste</h3>
+            <p class="muted">Technische und inhaltliche Aspekte zum Abhaken — gut für Website-Checks.</p>
+          </div>
+
+          <div class="card">
+            <h3>Barrierefreiheits-Quick-Check</h3>
+            <p class="muted">Kurz-Guide für erste Verbesserungen (Kontrast, Fokus, Alt-Texte).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- KARriere -->
+      <section id="karriere" tabindex="0">
+        <h2>Karriere — Werde Teil des Teams</h2>
+        <p class="muted">Wir suchen Menschen, die gerne Verantwortung übernehmen, sauber arbeiten und in einem kleinen, flexiblen Team wachsen wollen. Remote-first mit gelegentlichem Office-Tag.</p>
+
+        <div class="grid" style="margin-top:12px">
+          <div class="card">
+            <h3>Frontend Developer (m/w/d)</h3>
+            <p class="muted">Skills: JS/TS, React oder Svelte, Performance-Optimierung, Erfahrung mit CI/CD.</p>
+            <p class="muted">Bewerbung: kurzes Portfolio + Gehaltsvorstellung an <a href="mailto:jobs@toshiweb.de" style="color:white;text-decoration:underline">jobs@toshiweb.de</a></p>
+          </div>
+
+          <div class="card">
+            <h3>UX Designer (m/w/d)</h3>
+            <p class="muted">Skills: Figma, Prototyping, Nutzerforschung, Barrierefreiheit.</p>
+            <p class="muted">Wir bieten: flexible Arbeitszeiten, Weiterbildung, Wachstumsperspektiven.</p>
+          </div>
+
+          <div class="card">
+            <h3>Werkstudent / Praktikum</h3>
+            <p class="muted">Kurzzeitige Unterstützung möglich — wir bieten praktische Aufgaben und Mentoring.</p>
+          </div>
+        </div>
       </section>
 
       <!-- KONTAKT -->
       <section id="kontakt" tabindex="0">
         <h2>Kontakt & Erstgespräch</h2>
-        <p class="muted">Schreib uns: kurze Projektbeschreibung + gewünschter Zeitrahmen. Wir melden uns innerhalb von 1–3 Werktagen.</p>
+        <p class="muted">Schreibe uns eine kurze Projektbeschreibung, gewünschte Timeline und ein Budgetrahmen — wir melden uns innerhalb von 1–3 Werktagen.</p>
 
         <form id="contactForm" class="card" aria-label="Kontaktformular">
           <label for="name">Name</label>
@@ -404,8 +507,9 @@
             <p class="muted"><strong>Toshiweb</strong><br>Inhaber: Max Mustermann<br>Telefon: +49 123 4567890<br>E-Mail: <a href="mailto:kontakt@toshiweb.de" style="color:white;text-decoration:underline">kontakt@toshiweb.de</a></p>
           </div>
           <div class="card">
-            <h3>Office & Erreichbarkeit</h3>
-            <p class="muted">Adresse: Musterstr. 1, 12345 Musterstadt<br>Öffnungszeiten: Mo–Fr 9:00–17:00 (Termine nach Vereinbarung)</p>
+            <h3>Office & Anfahrt</h3>
+            <p class="muted">Musterstr. 1, 12345 Musterstadt — Office nach Absprache. ÖPNV-Anbindung: Hauptbahnhof 10 Min zu Fuß.</p>
+            <p class="small muted">Für Remote-Projekte arbeiten wir digital und treffen uns per Video-Call.</p>
           </div>
         </div>
       </section>
@@ -488,11 +592,22 @@
       </section>
 
       <footer>
-        <div class="muted">© <span id="year"></span> Toshiweb — Alle Rechte vorbehalten</div>
-        <div style="display:flex;gap:10px;align-items:center">
-          <a href="#" data-section="impressum">Impressum</a>
-          <a href="#" data-section="datenschutz">Datenschutz</a>
-          <a href="#" data-section="agb">AGB</a>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="muted">© <span id="year"></span> Toshiweb — Alle Rechte vorbehalten</div>
+          <div class="small muted">Made with care · Privacy by design</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+          <div style="display:flex;gap:10px;align-items:center">
+            <a href="#" data-section="impressum">Impressum</a>
+            <a href="#" data-section="datenschutz">Datenschutz</a>
+            <a href="#" data-section="agb">AGB</a>
+          </div>
+          <div class="social-links">
+            <a href="#" aria-label="Twitter">Twitter</a>
+            <a href="#" aria-label="LinkedIn">LinkedIn</a>
+            <a href="#" aria-label="GitHub">GitHub</a>
+          </div>
         </div>
       </footer>
 
@@ -536,7 +651,7 @@
       if(window.innerWidth < 760) menu.classList.remove('active');
     }
 
-    // Wire up links
+    // Wire up nav links
     links.forEach(link => {
       link.addEventListener('click', (e)=>{
         e.preventDefault();
@@ -545,10 +660,13 @@
       });
     });
 
-    // Cards that have data-section
+    // Make cards with role=button navigable (some cards have data-section)
     document.querySelectorAll('.card[role="button"]').forEach(card=>{
-      card.addEventListener('click', ()=> openSection(card.dataset.section));
-      card.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') openSection(card.dataset.section); });
+      // if card has dataset.section it will use it; otherwise fallback to 'leistungen'
+      const target = card.dataset.section || 'leistungen';
+      card.setAttribute('tabindex', '0');
+      card.addEventListener('click', ()=> openSection(target));
+      card.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') openSection(target); });
     });
 
     // Cookie banner logic
@@ -570,15 +688,12 @@
       disableTracking();
     });
 
-    function enableTracking(){
-      // Hier könnten Sie z. B. Google Analytics oder Matomo initialisieren
-      console.log('Tracking aktiviert');
-    }
+    function enableTracking(){ console.log('Tracking aktiviert'); /* Insert analytics init here if desired */ }
     function disableTracking(){ console.log('Tracking deaktiviert'); }
 
     if(localStorage.getItem('cookies_accepted') === 'true') enableTracking();
 
-    // Kontaktformular: mailto-Fallback
+    // Contact form: mailto fallback
     const contactForm = document.getElementById('contactForm');
     contactForm.addEventListener('submit', (e)=>{
       e.preventDefault();
@@ -605,13 +720,13 @@ ${message}`;
       window.location.href = `mailto:kontakt@toshiweb.de?subject=${subject}&body=${body}`;
     });
 
-    // Accessibility: toggle details with Enter
+    // Accessibility: allow Enter to toggle details
     document.querySelectorAll('details').forEach(d=>{ d.addEventListener('keypress', (e)=>{ if(e.key === 'Enter') d.open = !d.open; }); });
 
     // Close mobile menu when resizing to desktop
     window.addEventListener('resize', ()=>{ if(window.innerWidth >= 760) menu.classList.remove('active'); });
 
-    // Open hash section on load
+    // Open hash-based section on load
     (function openHashSection(){
       const hash = window.location.hash.replace('#','');
       if(hash){
