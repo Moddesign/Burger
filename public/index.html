@@ -204,8 +204,8 @@
 document.getElementById('year').textContent=new Date().getFullYear();
 const burger=document.getElementById('burger');
 const menu=document.getElementById('menu');
-const links=menu.querySelectorAll('a');
 const sections=document.querySelectorAll('main section');
+const allSectionLinks=document.querySelectorAll('a[data-section]');
 
 burger.addEventListener('click',()=>menu.classList.toggle('active'));
 burger.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ') menu.classList.toggle('active');});
@@ -217,7 +217,13 @@ function openSection(id){
   if(window.innerWidth<760) menu.classList.remove('active');
 }
 
-links.forEach(link=>link.addEventListener('click',e=>{e.preventDefault();openSection(link.dataset.section);}));
+allSectionLinks.forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    openSection(link.dataset.section);
+  });
+});
+
 document.querySelectorAll('.card[data-section]').forEach(card=>{ 
   card.addEventListener('click',()=>openSection(card.dataset.section));
   card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ') openSection(card.dataset.section);});
