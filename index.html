@@ -3,15 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>toshiweb — Vollflächig</title>
-<meta name="description" content="Modernes Webdesign, Entwicklung, Referenzen, Blog, Impressum und Datenschutz. Mobilfreundlich und barrierearm.">
+<title>toshiweb — Webdesign & Entwicklung</title>
+<meta name="description" content="toshiweb: Modernes Webdesign, Entwicklung, Referenzen, Blog, Impressum und Datenschutz. Mobilfreundlich und barrierearm.">
 <style>
   :root{
     --accent:#ffdd57;
     --glass: rgba(255,255,255,0.05);
     --radius:12px;
     --gap:20px;
-    --content-padding:28px;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;font-family:Inter,Arial,sans-serif;color:white;height:100%;overflow-x:hidden;}
@@ -28,9 +27,10 @@
   @media(min-width:760px){.burger{display:none;} nav.menu{display:flex;gap:12px;align-items:center;} nav.menu a{padding:14px 16px;}}
 
   main{flex:1; display:flex; flex-direction:column;}
-  /* Vollflächige Sektionen */
+
   main section {
     min-height:100vh;
+    width:100%;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -42,7 +42,6 @@
     background-position:center;
     background-repeat:no-repeat;
     transition:0.5s;
-    width:100%;
   }
   main section::before {
     content:"";
@@ -51,7 +50,7 @@
     left:0;
     right:0;
     bottom:0;
-    background:rgba(0,0,0,0.4); /* Overlay */
+    background:rgba(0,0,0,0.4);
     z-index:0;
   }
   main section > * {
@@ -99,7 +98,7 @@
   <!-- Startseite -->
   <section id="startseite" class="active" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=2000')">
     <h2>Willkommen bei toshiweb</h2>
-    <p>Wir unterstützen Unternehmen jeder Größe, online sichtbar zu werden. Mit modernen, schnellen und mobilfreundlichen Websites.</p>
+    <p>Wir bringen Ihr Unternehmen online nach vorne – mit modernen, schnellen und mobilfreundlichen Websites.</p>
     <a href="#" data-section="kontakt" class="btn">Jetzt Projekt starten</a>
     <div class="grid">
       <div class="card" data-section="leistungen"><h3>Webentwicklung</h3><p class="muted">Individuelle Websites und Webapps für jede Branche.</p></div>
