@@ -3,27 +3,43 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Toshiweb — Agentur für Web, UX & digitale Produkte</title>
+  <title>toshiweb — Agentur für Web, UX & digitale Produkte</title>
   <meta name="theme-color" content="#764ba2" />
-  <meta name="description" content="Toshiweb — Moderne Websites, Webapps, SEO und langfristiger Support. Agil, transparent und messbar." />
+  <meta name="description" content="toshiweb — Moderne Websites, Webapps, SEO und langfristiger Support. Agil, transparent und messbar." />
   <style>
     :root{
       --bg1:#667eea; --bg2:#764ba2; --accent:#ffdd57; --card-bg:rgba(0,0,0,0.45); --glass: rgba(255,255,255,0.03);
       --gap:20px; --radius:12px; --content-padding:28px; --max-width:1200px;
       --text:#ffffff; --muted:rgba(255,255,255,0.82);
+      --hero-img: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=2000&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&s='); /* full background */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body { margin: 0; font-family: Inter, system-ui, Arial, "Helvetica Neue", sans-serif; color: var(--text); min-height: 100vh;
-           background: linear-gradient(135deg,var(--bg1),var(--bg2)); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, Arial, "Helvetica Neue", sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      /* full-page background image + subtle overlay to keep text readable */
+      background-image:
+        linear-gradient(180deg, rgba(10,10,15,0.45), rgba(10,10,15,0.55)),
+        var(--hero-img);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display: flex;
+      flex-direction: column;
+    }
     a{color:inherit}
     .container{width:100%;padding:0 24px;margin:0 auto;max-width:var(--max-width)}
     header.navbar{width:100%;position:sticky;top:0;backdrop-filter: blur(6px); z-index:1100}
-    .navbar { background-color: rgba(0, 0, 0, 0.45); overflow: hidden; position: relative; border-bottom:1px solid rgba(255,255,255,0.04) }
+    .navbar { background-color: rgba(0, 0, 0, 0.55); overflow: hidden; position: relative; border-bottom:1px solid rgba(255,255,255,0.04) }
     .brand{display:flex;align-items:center;gap:12px;padding:14px 0}
-    .brand h1{font-size:1.05rem;margin:0;letter-spacing:0.3px}
+    .brand h1{font-size:1.05rem;margin:0;letter-spacing:0.3px; text-transform: lowercase}
     .navbar .menu { display: none; background-color: transparent; }
-    .navbar .menu a { color: white; text-decoration: none; display: block; padding: 12px 14px; font-weight:600; }
+    .navbar .menu a { color: white; text-decoration: none; display: block; padding: 12px 14px; font-weight:600; text-transform: none }
     .burger { cursor: pointer; display: block; position: absolute; top: 12px; right: 20px; width: 34px; height: 26px; z-index: 1200; }
     .burger div { background-color: white; height: 4px; margin: 4px 0; border-radius:3px; transition: transform 0.25s ease; }
     .menu.active{display:block}
@@ -33,29 +49,30 @@
       .navbar .menu a{padding:14px 16px}
     }
 
-    main { width:100%; margin: 28px 0; padding: 0; position: relative; overflow: visible; }
-    .panel { margin: 0 auto; background: var(--card-bg); padding: var(--content-padding); border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,0.35); max-width:var(--max-width); }
-    main::before { content: ""; position: absolute; left:0; right:0; top:0; height:360px; background-size: cover; background-position: center; background-repeat: no-repeat; filter: brightness(0.56); z-index: -1; transition: background-image 0.6s ease-in-out; background-image: var(--bg-image, url('https://images.unsplash.com/photo-1498050108023-c5249f4df085')); border-bottom-left-radius:30px; border-bottom-right-radius:30px; }
+    main { width:100%; margin: 28px 0; padding: 0; position: relative; overflow: visible; flex: 1; }
+    .panel { margin: 0 auto; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55)); padding: var(--content-padding); border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,0.55); max-width:var(--max-width); }
+    /* hide old pseudo background — we use body background to fill whole page */
+    main::before { display: none; }
 
     section { display: none; backface-visibility: hidden; transform-style: preserve-3d; padding-bottom:8px; }
     section.active { display: block; }
     @keyframes flipIn { 0% { transform: rotateY(-90deg); opacity: 0; } 100% { transform: rotateY(0deg); opacity: 1; } }
     section.flip-animation { animation: flipIn 0.45s forwards; }
-    h2 { margin-top: 0; border-bottom: 2px solid rgba(255,255,255,0.08); padding-bottom: 8px; }
+    h2 { margin-top: 0; border-bottom: 2px solid rgba(255,255,255,0.08); padding-bottom: 8px; text-transform: none }
     p, ul { line-height: 1.6; color: var(--text) }
     .muted { color: var(--muted) }
 
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--gap)}
-    .card{background:var(--glass);padding:18px;border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+    .card{background:rgba(255,255,255,0.02);padding:18px;border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
     .card[role="button"]{cursor:pointer}
     .hero { display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;padding:18px }
-    .hero .kicker{font-weight:700;background:rgba(255,255,255,0.06);padding:6px 12px;border-radius:999px;font-size:0.85rem}
+    .hero .kicker{font-weight:700;background:rgba(255,255,255,0.06);padding:6px 12px;border-radius:999px;font-size:0.85rem; text-transform: lowercase }
     .cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
     .btn { padding:10px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px }
     .btn-primary{background:var(--accent);color:#111}
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);color:white}
 
-    .tag { display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);font-weight:600;margin-right:8px;font-size:0.86rem }
+    .tag { display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);font-weight:600;margin-right:8px;font-size:0.86rem; text-transform: lowercase }
     .meta { font-size:0.9rem;opacity:0.85 }
     .hr { height:1px;background:rgba(255,255,255,0.06);margin:18px 0;border-radius:2px }
 
@@ -68,7 +85,7 @@
     .cookie-actions{display:flex;gap:8px}
 
     footer{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-    .lead { font-size:1.05rem; max-width:900px; margin:0 auto; color:rgba(255,255,255,0.95) }
+    .lead { font-size:1.05rem; max-width:900px; margin:0 auto; color:rgba(255,255,255,0.95); text-align:center }
 
     a:focus, button:focus, input:focus, textarea:focus, .card:focus{outline:3px solid rgba(255,255,255,0.12);outline-offset:3px}
     blockquote{margin:10px 0;padding:12px;border-left:4px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);border-radius:8px}
@@ -77,24 +94,24 @@
     .cover { width:100%;height:320px;object-fit:cover;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,0.35) }
 
     /* extra content spacing to avoid empty feeling */
-    .big-block { padding:22px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; margin-top:12px }
+    .big-block { padding:22px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border-radius:12px; margin-top:12px }
     .two-col { display:grid; grid-template-columns: 1fr 380px; gap:18px }
     @media (max-width:980px){ .two-col{grid-template-columns:1fr} }
     .small { font-size:0.95rem; color:var(--muted) }
-    .social-links a{display:inline-block;margin-right:10px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.03)}
+    .social-links a{display:inline-block;margin-right:10px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.03); color:var(--text); text-decoration:none }
   </style>
 </head>
 <body>
   <header class="navbar" role="banner">
     <div class="container" style="display:flex;justify-content:space-between;align-items:center;">
       <div class="brand" aria-hidden="false">
-        <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--bg1),var(--bg2));display:flex;align-items:center;justify-content:center;font-weight:800;color:white">T</div>
-        <h1>Toshiweb</h1>
+        <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--bg1),var(--bg2));display:flex;align-items:center;justify-content:center;font-weight:800;color:white; text-transform: none">t</div>
+        <h1>toshiweb</h1>
       </div>
 
       <nav class="menu" id="menu" role="navigation" aria-label="Hauptnavigation">
         <a href="#" data-section="startseite">Startseite</a>
-        <a href="#" data-section="ueber-uns">Über Uns</a>
+        <a href="#" data-section="ueber-uns">Über uns</a>
         <a href="#" data-section="leistungen">Leistungen</a>
         <a href="#" data-section="referenzen">Referenzen</a>
         <a href="#" data-section="blog">Blog</a>
@@ -122,8 +139,8 @@
       <!-- HERO / STARTSEITE -->
       <section id="startseite" class="active" tabindex="0">
         <div class="hero">
-          <div class="kicker">Digitales Handwerk mit Strategie</div>
-          <h2 style="font-size:2rem;margin:6px 0 0 0">Toshiweb — Websites & Webapps, die funktionieren</h2>
+          <div class="kicker">digitales handwerk</div>
+          <h2 style="font-size:2rem;margin:6px 0 0 0">toshiweb — websites & webapps, die funktionieren</h2>
           <p class="lead">Wir bauen klare, performante und wartbare Webprodukte für kleine und mittlere Unternehmen. Unser Fokus liegt auf messbaren Ergebnissen: bessere Sichtbarkeit, höhere Conversion und nachhaltige technologische Basis.</p>
           <div class="cta-row">
             <a href="#" data-section="kontakt" class="btn btn-primary">Projekt starten</a>
@@ -179,10 +196,10 @@
           <aside class="big-block">
             <h4 style="margin:0 0 8px 0">Sichtbarkeit verbessern — 3-Minuten-Checkliste</h4>
             <ol class="small muted">
-              <li>Ist deine Seite mobilfreundlich? Test: Ladezeit < 3s auf Mobile.</li>
+              <li>Ist deine Seite mobilfreundlich? Test: Ladezeit &lt; 3s auf Mobile.</li>
               <li>Hast du klare CTAs auf jeder relevanten Seite (Kontakt, Angebot)?</li>
-              <li>Tracking & Goals im Analytics-Tool eingerichtet (Conversions messen).</li>
-              <li>Technische Basis: HTTPS, saubere Meta-Tags, Sitemap & robots.txt.</li>
+              <li>Tracking &amp; Goals im Analytics-Tool eingerichtet (Conversions messen).</li>
+              <li>Technische Basis: HTTPS, saubere Meta-Tags, Sitemap &amp; robots.txt.</li>
             </ol>
             <p class="small muted" style="margin-top:10px">Wenn du willst, machen wir den Check im Erstgespräch kostenfrei.</p>
           </aside>
@@ -192,8 +209,8 @@
 
       <!-- ÜBER UNS -->
       <section id="ueber-uns" tabindex="0">
-        <h2>Über Toshiweb</h2>
-        <p class="muted">Toshiweb ist eine Boutique-Agentur mit Sitz in Musterstadt. Wir kombinieren strategische Beratung mit technischem Fokus — so entstehen Produkte, die nachhaltig funktionieren und messbare Werte liefern. Unsere Arbeit richtet sich an Unternehmer:innen, die Wert auf Qualität, Klarheit und langfristigen Erfolg legen.</p>
+        <h2>Über toshiweb</h2>
+        <p class="muted">toshiweb ist eine Boutique-Agentur mit Sitz in Musterstadt. Wir kombinieren strategische Beratung mit technischem Fokus — so entstehen Produkte, die nachhaltig funktionieren und messbare Werte liefern. Unsere Arbeit richtet sich an Unternehmer:innen, die Wert auf Qualität, Klarheit und langfristigen Erfolg legen.</p>
 
         <div class="grid" style="margin-top:12px">
           <div class="card">
@@ -213,7 +230,7 @@
         <div class="grid" style="margin-top:12px">
           <div class="card">
             <strong>Max Mustermann</strong>
-            <p class="muted">Gründer & Projektleitung — Strategie, Beratung, Kundenkommunikation. Verantwortet Planung, Roadmaps und Delivery.</p>
+            <p class="muted">Gründer &amp; Projektleitung — Strategie, Beratung, Kundenkommunikation. Verantwortet Planung, Roadmaps und Delivery.</p>
           </div>
           <div class="card">
             <strong>Anna Beispiel</strong>
@@ -236,7 +253,7 @@
           <li>Transparenz: Klare Angebote, nachvollziehbare Arbeitspakete.</li>
           <li>Qualität: Gute Architekturen statt Quick-Fixes.</li>
           <li>Nachhaltigkeit: Software, die langfristig wartbar ist.</li>
-          <li>Respekt: Wertschätzende Zusammenarbeit mit Kunden & Partnern.</li>
+          <li>Respekt: Wertschätzende Zusammenarbeit mit Kunden &amp; Partnern.</li>
         </ul>
       </section>
 
@@ -247,63 +264,63 @@
 
         <div class="grid" style="margin-top:12px">
           <div class="card">
-            <h3>Strategie & Forschung</h3>
+            <h3>Strategie &amp; Forschung</h3>
             <p class="muted">Analyse, Workshops und Zieldefinition — damit jedes Feature notwendige Nutzer- oder Geschäftsziele erfüllt.</p>
             <ul class="muted">
-              <li>Business & Product Workshops</li>
-              <li>User Research & Interviews</li>
-              <li>SEO- & Content-Audit</li>
+              <li>Business &amp; Product Workshops</li>
+              <li>User Research &amp; Interviews</li>
+              <li>SEO- &amp; Content-Audit</li>
               <li>Priorisierungs-Matrix (MoSCoW)</li>
             </ul>
           </div>
 
           <div class="card">
-            <h3>UX, UI & Prototyping</h3>
+            <h3>UX, UI &amp; Prototyping</h3>
             <p class="muted">Vom groben Flow bis zum finalen Designsystem — interaktive Prototypen beschleunigen Entscheidungen.</p>
             <ul class="muted">
-              <li>Wireframes & Klickbare Prototypen</li>
-              <li>Designsystem & Komponentenbibliothek</li>
+              <li>Wireframes &amp; Klickbare Prototypen</li>
+              <li>Designsystem &amp; Komponentenbibliothek</li>
               <li>Accessibility-Review (WCAG-Checkliste)</li>
             </ul>
           </div>
 
           <div class="card">
-            <h3>Frontend & Backend</h3>
+            <h3>Frontend &amp; Backend</h3>
             <p class="muted">Modulare Architektur, performante Frontends und skalierbare Server-APIs.</p>
             <ul class="muted">
               <li>Jamstack / SSR / SPA je nach Use-Case</li>
               <li>Headless CMS Integration</li>
-              <li>API-Design & Auth</li>
-              <li>Automatisierte Tests & CI/CD</li>
+              <li>API-Design &amp; Auth</li>
+              <li>Automatisierte Tests &amp; CI/CD</li>
             </ul>
           </div>
 
           <div class="card">
-            <h3>Hosting, Wartung & Support</h3>
+            <h3>Hosting, Wartung &amp; Support</h3>
             <p class="muted">Betrieb und Sicherheit — wir übernehmen Monitoring, Backups und schnelle Fehlerbehebung.</p>
             <ul class="muted">
-              <li>Managed Hosting & Backups</li>
-              <li>Security-Monitoring & Patches</li>
-              <li>Retainer & SLA-Optionen</li>
+              <li>Managed Hosting &amp; Backups</li>
+              <li>Security-Monitoring &amp; Patches</li>
+              <li>Retainer &amp; SLA-Optionen</li>
             </ul>
           </div>
         </div>
 
         <div class="hr"></div>
 
-        <h3>Prozess — einfach & transparent</h3>
+        <h3>Prozess — einfach &amp; transparent</h3>
         <ol class="muted">
-          <li>Kickoff & Zieldefinition</li>
-          <li>Prototyping & User-Feedback</li>
+          <li>Kickoff &amp; Zieldefinition</li>
+          <li>Prototyping &amp; User-Feedback</li>
           <li>Implementierung in Sprints</li>
-          <li>Test, Launch & Monitoring</li>
+          <li>Test, Launch &amp; Monitoring</li>
           <li>Wartung und Weiterentwicklung</li>
         </ol>
 
         <div class="hr"></div>
 
         <h3>Preismodelle</h3>
-        <p class="muted">Wir bieten Festpreise für klar definierte Leistungen, Time & Materials für flexible Projekte und Retainer für kontinuierliche Betreuung.</p>
+        <p class="muted">Wir bieten Festpreise für klar definierte Leistungen, Time &amp; Materials für flexible Projekte und Retainer für kontinuierliche Betreuung.</p>
 
         <table class="muted" aria-label="Preistabelle">
           <thead><tr><th>Plan</th><th>Inhalt</th><th>Preis (ab)</th></tr></thead>
@@ -318,20 +335,20 @@
 
       <!-- REFERENZEN -->
       <section id="referenzen" tabindex="0">
-        <h2>Referenzen & Case Studies</h2>
+        <h2>Referenzen &amp; Case Studies</h2>
         <p class="muted">Hier siehst du kompakte Fallstudien mit Ziel, Maßnahmen und Resultaten. Vollständige Case Studies schicken wir auf Anfrage.</p>
 
         <div class="grid" style="margin-top:12px">
           <div class="card">
             <strong>Shopboost — E-Commerce Relaunch</strong>
-            <p class="muted">Ziel: bessere Conversion & Performance. Maßnahmen: Headless-Architektur, optimierter Checkout, Bildoptimierung, CDN. Ergebnis: +35% Conversion in 3 Monaten, LCP < 1.8s.</p>
+            <p class="muted">Ziel: bessere Conversion &amp; Performance. Maßnahmen: Headless-Architektur, optimierter Checkout, Bildoptimierung, CDN. Ergebnis: +35% Conversion in 3 Monaten, LCP &lt; 1.8s.</p>
             <p class="muted">Leistungen: UX-Redesign, Implementierung, Performance-Monitoring.</p>
             <p class="small muted">Technologien: React, Node.js, Vercel, Strapi.</p>
           </div>
 
           <div class="card">
             <strong>Corporate One — International</strong>
-            <p class="muted">Ziel: Sichtbarkeit DE/EN & einfache Contentpflege. Maßnahmen: hreflang, strukturierte Inhalte, Redaktionsanleitung. Ergebnis: organischer Traffic +42% (6 Monate).</p>
+            <p class="muted">Ziel: Sichtbarkeit DE/EN &amp; einfache Contentpflege. Maßnahmen: hreflang, strukturierte Inhalte, Redaktionsanleitung. Ergebnis: organischer Traffic +42% (6 Monate).</p>
             <p class="small muted">Technologien: Static site + Headless CMS, CDN, SEO-Optimierung.</p>
           </div>
 
@@ -344,19 +361,19 @@
         <div class="hr"></div>
 
         <h3>Kundenstimmen</h3>
-        <blockquote>"Toshiweb hat unseren Relaunch zuverlässig umgesetzt — termintreu, technisch sauber und mit klaren Ergebnissen." — E. Kunde, CEO</blockquote>
+        <blockquote>"toshiweb hat unseren Relaunch zuverlässig umgesetzt — termintreu, technisch sauber und mit klaren Ergebnissen." — E. Kunde, CEO</blockquote>
         <blockquote>"Kommunikation super, Ergebnisse messbar — wir arbeiten seitdem gemeinsam an Weiterentwicklung." — M. Kunde, Marketing</blockquote>
       </section>
 
       <!-- BLOG -->
       <section id="blog" tabindex="0">
-        <h2>Blog & Lernmaterial</h2>
+        <h2>Blog &amp; Lernmaterial</h2>
         <p class="muted">Kurzartikel, Anleitungen und Checklisten — praktisch, umgesetzt und ohne viel Theorie.</p>
 
         <div class="grid" style="margin-top:12px">
           <article class="card">
             <h3>Wie man SEO richtig plant</h3>
-            <p class="muted">Schritt-für-Schritt: technische Basis, Content-Priorisierung, KPIs & Reporting. Lesezeit: ~6 Min.</p>
+            <p class="muted">Schritt-für-Schritt: technische Basis, Content-Priorisierung, KPIs &amp; Reporting. Lesezeit: ~6 Min.</p>
             <p class="small muted">Kernaussage: Technik zuerst, dann Content mit Nutzerintention.</p>
           </article>
 
@@ -409,8 +426,8 @@
 
       <!-- RESSOURCEN -->
       <section id="ressourcen" tabindex="0">
-        <h2>Ressourcen & Downloads</h2>
-        <p class="muted">Praktische Vorlagen & Checklisten zum Download — nützliche Hilfsmittel für den Projektstart.</p>
+        <h2>Ressourcen &amp; Downloads</h2>
+        <p class="muted">Praktische Vorlagen &amp; Checklisten zum Download — nützliche Hilfsmittel für den Projektstart.</p>
 
         <div class="grid" style="margin-top:12px">
           <div class="card">
@@ -458,7 +475,7 @@
 
       <!-- KONTAKT -->
       <section id="kontakt" tabindex="0">
-        <h2>Kontakt & Erstgespräch</h2>
+        <h2>Kontakt &amp; Erstgespräch</h2>
         <p class="muted">Schreibe uns eine kurze Projektbeschreibung, gewünschte Timeline und ein Budgetrahmen — wir melden uns innerhalb von 1–3 Werktagen.</p>
 
         <form id="contactForm" class="card" aria-label="Kontaktformular">
@@ -504,10 +521,10 @@
         <div class="grid">
           <div class="card">
             <h3>Direkter Kontakt</h3>
-            <p class="muted"><strong>Toshiweb</strong><br>Inhaber: Max Mustermann<br>Telefon: +49 123 4567890<br>E-Mail: <a href="mailto:kontakt@toshiweb.de" style="color:white;text-decoration:underline">kontakt@toshiweb.de</a></p>
+            <p class="muted"><strong>toshiweb</strong><br>Inhaber: Max Mustermann<br>Telefon: +49 123 4567890<br>E-Mail: <a href="mailto:kontakt@toshiweb.de" style="color:white;text-decoration:underline">kontakt@toshiweb.de</a></p>
           </div>
           <div class="card">
-            <h3>Office & Anfahrt</h3>
+            <h3>Office &amp; Anfahrt</h3>
             <p class="muted">Musterstr. 1, 12345 Musterstadt — Office nach Absprache. ÖPNV-Anbindung: Hauptbahnhof 10 Min zu Fuß.</p>
             <p class="small muted">Für Remote-Projekte arbeiten wir digital und treffen uns per Video-Call.</p>
           </div>
@@ -517,7 +534,7 @@
       <!-- IMPRESSUM -->
       <section id="impressum" tabindex="0">
         <h2>Impressum</h2>
-        <p><strong>Toshiweb</strong><br>
+        <p><strong>toshiweb</strong><br>
         Inhaber: Max Mustermann<br>
         Adresse: Musterstr. 1, 12345 Musterstadt<br>
         Telefon: +49 123 4567890<br>
@@ -540,19 +557,19 @@
         <p class="muted">Der Schutz Ihrer personenbezogenen Daten ist uns wichtig. Im Folgenden informieren wir, welche Daten wir verarbeiten, aus welchem Grund und welche Rechte Sie haben.</p>
 
         <h3>1. Verantwortlicher</h3>
-        <p class="muted"><strong>Toshiweb</strong><br>Max Mustermann<br>Musterstr. 1, 12345 Musterstadt<br>E-Mail: <a href="mailto:kontakt@toshiweb.de" style="color:white;text-decoration:underline">kontakt@toshiweb.de</a></p>
+        <p class="muted"><strong>toshiweb</strong><br>Max Mustermann<br>Musterstr. 1, 12345 Musterstadt<br>E-Mail: <a href="mailto:kontakt@toshiweb.de" style="color:white;text-decoration:underline">kontakt@toshiweb.de</a></p>
 
         <h3>2. Erhobene Daten</h3>
         <ul class="muted">
           <li>Kontaktformular: Name, E-Mail, Nachricht, ggf. Firma und Budget.</li>
           <li>Technische Daten: IP-Adresse, Browsertyp, Zeitpunkt des Zugriffs (Logfiles) — zur Abwehr von Angriffen und zur technischen Sicherheit.</li>
-          <li>Cookies & Tracking: Nur nach Einwilligung. Technisch notwendige Cookies bleiben aktiv.</li>
+          <li>Cookies &amp; Tracking: Nur nach Einwilligung. Technisch notwendige Cookies bleiben aktiv.</li>
         </ul>
 
-        <h3>3. Zweck & Rechtsgrundlage</h3>
+        <h3>3. Zweck &amp; Rechtsgrundlage</h3>
         <p class="muted">Kontaktdaten werden zur Bearbeitung Ihrer Anfrage verarbeitet (Art. 6 Abs. 1 lit. b DSGVO). Technische Daten werden zur Sicherheit und Stabilität verarbeitet (berechtigtes Interesse, Art. 6 Abs. 1 lit. f).</p>
 
-        <h3>4. Weitergabe & Auftragsverarbeitung</h3>
+        <h3>4. Weitergabe &amp; Auftragsverarbeitung</h3>
         <p class="muted">Hosting-Anbieter und ggf. Tools (z. B. Form-Service) sind Auftragsverarbeiter. Eine Weitergabe an Dritte erfolgt nur, wenn sie für die Vertragsabwicklung erforderlich ist oder gesetzlich vorgeschrieben.</p>
 
         <h3>5. Speicherdauer</h3>
@@ -567,10 +584,10 @@
       <!-- AGB -->
       <section id="agb" tabindex="0">
         <h2>Allgemeine Geschäftsbedingungen (AGB)</h2>
-        <p class="muted">Die folgenden AGB bilden die vertragliche Grundlage zwischen Toshiweb und dem Auftraggeber. Sie sind als Vorlage gedacht und sollten rechtlich geprüft werden.</p>
+        <p class="muted">Die folgenden AGB bilden die vertragliche Grundlage zwischen toshiweb und dem Auftraggeber. Sie sind als Vorlage gedacht und sollten rechtlich geprüft werden.</p>
 
         <h3>1. Geltungsbereich</h3>
-        <p class="muted">Diese AGB gelten für alle Verträge über Dienstleistungen, die Toshiweb gegenüber Unternehmern erbringt, sofern nicht ausdrücklich etwas anderes vereinbart ist.</p>
+        <p class="muted">Diese AGB gelten für alle Verträge über Dienstleistungen, die toshiweb gegenüber Unternehmern erbringt, sofern nicht ausdrücklich etwas anderes vereinbart ist.</p>
 
         <h3>2. Vertragsgegenstand</h3>
         <p class="muted">Gegenstand sind Leistungen der Webentwicklung, Design, Beratung, Hosting und Support, wie im Angebot beschrieben.</p>
@@ -593,7 +610,7 @@
 
       <footer>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <div class="muted">© <span id="year"></span> Toshiweb — Alle Rechte vorbehalten</div>
+          <div class="muted">© <span id="year"></span> toshiweb — Alle Rechte vorbehalten</div>
           <div class="small muted">Made with care · Privacy by design</div>
         </div>
 
@@ -662,7 +679,6 @@
 
     // Make cards with role=button navigable (some cards have data-section)
     document.querySelectorAll('.card[role="button"]').forEach(card=>{
-      // if card has dataset.section it will use it; otherwise fallback to 'leistungen'
       const target = card.dataset.section || 'leistungen';
       card.setAttribute('tabindex', '0');
       card.addEventListener('click', ()=> openSection(target));
