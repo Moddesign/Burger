@@ -15,7 +15,7 @@
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;font-family:Inter,Arial,sans-serif;color:white;height:100%;overflow-x:hidden;}
-  body{background:#111;}
+  body{background:#111;display:flex;flex-direction:column;min-height:100vh;}
 
   header.navbar{position:sticky;top:0;z-index:1000;background:rgba(0,0,0,0.45);backdrop-filter:blur(6px);}
   .brand{display:flex;align-items:center;gap:12px;padding:14px;}
@@ -27,6 +27,7 @@
   .menu.active{display:block;}
   @media(min-width:760px){.burger{display:none;} nav.menu{display:flex;gap:12px;align-items:center;} nav.menu a{padding:14px 16px;}}
 
+  main{flex:1; display:flex; flex-direction:column;}
   /* Vollflächige Sektionen */
   main section {
     min-height:100vh;
@@ -34,13 +35,14 @@
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    padding:40px 24px;
     text-align:center;
     position:relative;
-    background-size:cover;       /* Vollflächig */
-    background-position:center;  /* Zentriert */
-    background-repeat:no-repeat; /* Kein Wiederholen */
+    padding:40px 24px;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
     transition:0.5s;
+    width:100%;
   }
   main section::before {
     content:"";
