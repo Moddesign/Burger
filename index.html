@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Webagentur Beispiel — Vollflächig</title>
+  <title>Toshiweb — Vollflächig</title>
   <meta name="theme-color" content="#764ba2" />
   <meta name="description" content="Modernes Webdesign, Entwicklung, Referenzen, Blog, Impressum und Datenschutz. Mobilfreundlich und barrierearm." />
   <style>
@@ -49,6 +49,7 @@
     /* grid for cards */
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--gap)}
     .card{background:var(--glass);padding:16px;border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+    .card[role="button"]{cursor:pointer}
 
     /* contact form */
     form { display:grid; gap:12px; }
@@ -66,7 +67,7 @@
     footer{margin-top:18px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 
     /* accessible focus */
-    a:focus, button:focus, input:focus, textarea:focus{outline:3px solid rgba(255,255,255,0.14);outline-offset:2px}
+    a:focus, button:focus, input:focus, textarea:focus, .card:focus{outline:3px solid rgba(255,255,255,0.14);outline-offset:2px}
 
   </style>
 </head>
@@ -75,8 +76,8 @@
     <div class="container">
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <div class="brand">
-          <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--bg1),var(--bg2));display:flex;align-items:center;justify-content:center;font-weight:800;color:white">W</div>
-          <h1>Webagentur Toshiweb</h1>
+          <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--bg1),var(--bg2));display:flex;align-items:center;justify-content:center;font-weight:800;color:white">T</div>
+          <h1>Toshiweb</h1>
         </div>
         <div style="display:flex;align-items:center;gap:12px">
           <nav class="menu" id="menu" role="navigation" aria-label="Hauptnavigation">
@@ -106,25 +107,29 @@
         <div style="text-align:center;margin-bottom:18px;">
           <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="Teamarbeit" style="width:100%;max-height:420px;object-fit:cover;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,0.4)">
           <h2 style="font-size:2rem;margin-top:18px;">Klare Botschaft — Mehr Kunden, bessere Präsenz</h2>
-          <p style="font-size:1.05rem;max-width:1000px;margin:8px auto 12px auto;">Wir helfen kleinen und mittleren Unternehmen, online sichtbar zu werden — mit performanten Websites, die konvertieren. Schnell. Sicher. Mobilgerecht.</p>
+          <p style="font-size:1.05rem;max-width:1000px;margin:8px auto 12px auto;">Toshiweb hilft kleinen und mittleren Unternehmen, online sichtbar zu werden — mit performanten Websites, die konvertieren. Schnell. Sicher. Mobilgerecht.</p>
           <a href="#" data-section="kontakt" class="primary" style="display:inline-block;margin-top:8px;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:700">Jetzt Projekt starten</a>
         </div>
 
         <div class="grid">
-          <div class="card">
+          <!-- Karten sind jetzt klickbar und öffnen passende Sektionen -->
+          <div class="card" role="button" tabindex="0" data-section="leistungen">
             <img src="https://img.icons8.com/ios-filled/100/ffffff/source-code.png" alt="Webentwicklung" width="60" height="60">
             <h3>Webentwicklung</h3>
             <p class="muted">Individuelle, skalierbare und performante Websites – exakt auf dich zugeschnitten. Wir setzen moderne Frameworks und sauberen Code ein, damit deine Seite schnell lädt und einfach zu warten ist.</p>
+            <p class="muted" style="margin-top:8px;font-size:0.9rem;opacity:0.8">Mehr erfahren →</p>
           </div>
-          <div class="card">
+          <div class="card" role="button" tabindex="0" data-section="ueber-uns">
             <img src="https://img.icons8.com/ios-filled/100/ffffff/responsive.png" alt="Responsive Design" width="60" height="60">
             <h3>Responsive Design</h3>
             <p class="muted">Optimiert für Smartphones, Tablets und Desktops – mobilfreundlich von Anfang an. Unsere Designs sind nutzerzentriert und barrierearm.</p>
+            <p class="muted" style="margin-top:8px;font-size:0.9rem;opacity:0.8">Mehr erfahren →</p>
           </div>
-          <div class="card">
+          <div class="card" role="button" tabindex="0" data-section="referenzen">
             <img src="https://img.icons8.com/ios-filled/100/ffffff/seo.png" alt="SEO" width="60" height="60">
             <h3>SEO & Support</h3>
             <p class="muted">Wir sorgen dafür, dass du gefunden wirst – durchdachte Suchmaschinenoptimierung, technische Maßnahmen und laufender Support nach dem Launch.</p>
+            <p class="muted" style="margin-top:8px;font-size:0.9rem;opacity:0.8">Mehr erfahren →</p>
           </div>
         </div>
 
@@ -132,7 +137,7 @@
 
       <section id="ueber-uns" tabindex="0">
         <h2>Über Uns</h2>
-        <p>Unsere Agentur besteht aus einem kleinen Kernteam mit über 10 Jahren Erfahrung in Webentwicklung, UX/UI-Design und Online-Marketing. Wir glauben daran, dass digitale Produkte klar, schnell und nutzerzentriert sein müssen.</p>
+        <p>Toshiweb besteht aus einem kleinen Kernteam mit über 10 Jahren Erfahrung in Webentwicklung, UX/UI-Design und Online-Marketing. Wir glauben daran, dass digitale Produkte klar, schnell und nutzerzentriert sein müssen.</p>
         <p>Unsere Werte: <strong>Transparenz</strong>, <strong>Nachhaltigkeit</strong> und <strong>Qualität</strong>. Wir arbeiten agil, liefern in Etappen und binden dich in jede Phase des Projekts ein.</p>
 
         <div class="grid" style="margin-top:12px;">
@@ -180,14 +185,14 @@
 
       <section id="kontakt" tabindex="0">
         <h2>Kontakt</h2>
-        <p>Hast du Fragen oder möchtest du ein Projekt besprechen? Nutze das Formular oder schreibe uns direkt an <a href="mailto:kontakt@beispiel.de">kontakt@beispiel.de</a>.</p>
+        <p>Hast du Fragen oder möchtest du ein Projekt besprechen? Nutze das Formular oder schreibe uns direkt an <a href="mailto:kontakt@toshiweb.de">kontakt@toshiweb.de</a>.</p>
 
         <form id="contactForm" class="card" aria-label="Kontaktformular">
           <label for="name">Name</label>
           <input id="name" name="name" type="text" placeholder="Dein Name" required>
 
           <label for="email">E‑Mail</label>
-          <input id="email" name="email" type="email" placeholder="name@beispiel.de" required>
+          <input id="email" name="email" type="email" placeholder="name@toshiweb.de" required>
 
           <label for="company">Firma (optional)</label>
           <input id="company" name="company" type="text" placeholder="Firmenname">
@@ -207,13 +212,13 @@
 
       <section id="impressum" tabindex="0">
         <h2>Impressum</h2>
-        <p><strong>Webagentur Toshiweb</strong><br>
-        Inhaber: Tosh Shi<br>
-        Adresse: Webstr. 1, 12627 Berlin<br>
+        <p><strong>Toshiweb</strong><br>
+        Inhaber: Max Mustermann<br>
+        Adresse: Musterstr. 1, 12345 Musterstadt<br>
         Telefon: +49 123 4567890<br>
-        E‑Mail: kontakt@toshi.de</p>
+        E‑Mail: kontakt@toshiweb.de</p>
         <p>Umsatzsteuer-ID: DE123456789<br>Handelsregister: Amtsgericht Musterstadt, HRB 12345</p>
-        <p>Inhaltlich verantwortlich gemäß § 55 Abs. 2 RStV: Tosh Shi</p>
+        <p>Inhaltlich verantwortlich gemäß § 55 Abs. 2 RStV: Max Mustermann</p>
       </section>
 
       <section id="datenschutz" tabindex="0">
@@ -221,7 +226,7 @@
         <p>Wir nehmen den Schutz Deiner personenbezogenen Daten ernst. Diese Seite erklärt, welche Daten wir erheben, wofür wir sie verwenden und welche Rechte du hast.</p>
         <h3>Welche Daten wir verarbeiten</h3>
         <ul>
-          <li>Kontaktinformationen (z. B. Name, E‑Mail) bei direkten Anfragen.</li>
+          <li>Kontaktinformationen (z. B. Name, E-Mail) bei direkten Anfragen.</li>
           <li>Technische Daten (z. B. IP-Adresse, Browsertyp) für Sicherheits- und Analysezwecke — nur mit Einwilligung für Tracking.</li>
         </ul>
         <h3>Rechtsgrundlagen</h3>
@@ -233,12 +238,12 @@
 
       <section id="agb" tabindex="0">
         <h2>Allgemeine Geschäftsbedingungen (AGB)</h2>
-        <p>Diese AGB regeln die Zusammenarbeit zwischen Webagentur Beispiel und dem Auftraggeber. Sie enthalten Informationen zu Leistungsumfang, Vergütung, Lieferung, Gewährleistung und Haftung.(fiktive Darstellung, Projekt) </p>
+        <p>Diese AGB regeln die Zusammenarbeit zwischen Toshiweb und dem Auftraggeber. Sie enthalten Informationen zu Leistungsumfang, Vergütung, Lieferung, Gewährleistung und Haftung.</p>
         <p class="muted">(Platzhalter — rechtlich prüfen und anpassen.)</p>
       </section>
 
       <footer>
-        <div class="muted">© <span id="year"></span> Webagentur Beispiel</div>
+        <div class="muted">© <span id="year"></span> Toshiweb</div>
         <div style="display:flex;gap:10px;align-items:center">
           <a href="#" data-section="impressum">Impressum</a>
           <a href="#" data-section="datenschutz">Datenschutz</a>
@@ -253,7 +258,7 @@
   <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="assertive" aria-label="Cookie Hinweise" style="display:none">
     <div style="flex:1">
       <p style="margin:0;font-weight:600">Wir verwenden Cookies</p>
-      <p class="muted" style="margin:6px 0 0 0">Diese Website nutzt technisch notwendige Cookies. Für analytische Zwecke setzen wir nur mit Ihrer Zustimmung Tracking ein.(Fiktive Darstellung,Projekt) </p>
+      <p class="muted" style="margin:6px 0 0 0">Diese Website nutzt technisch notwendige Cookies. Für analytische Zwecke setzen wir nur mit Ihrer Zustimmung Tracking ein.</p>
     </div>
     <div class="cookie-actions">
       <button id="cookieDecline" class="primary" style="background:transparent;border:1px solid rgba(255,255,255,0.12);color:white">Ablehnen</button>
@@ -270,21 +275,40 @@
     const yearSpan = document.getElementById('year');
     yearSpan.textContent = new Date().getFullYear();
 
+    // Toggle mobile menu
     burger.addEventListener('click', ()=> menu.classList.toggle('active'));
     burger.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') menu.classList.toggle('active'); });
 
+    // Function to open a section by id
+    function openSection(id){
+      if(!id) return;
+      sections.forEach(s=>{ s.classList.remove('active','flip-animation'); });
+      const target = document.getElementById(id);
+      if(target){
+        target.classList.add('active','flip-animation');
+        target.focus({preventScroll:true});
+        // scroll panel to top smoothly
+        window.scrollTo({top:0, behavior:'smooth'});
+      }
+      // close mobile menu
+      if(window.innerWidth < 760) menu.classList.remove('active');
+    }
+
+    // Menu links
     links.forEach(link => {
       link.addEventListener('click', (e)=>{
         e.preventDefault();
         const id = link.dataset.section;
-        if(!id) return;
-        // hide all
-        sections.forEach(s=>{ s.classList.remove('active','flip-animation'); });
-        const target = document.getElementById(id);
-        if(target){ target.classList.add('active','flip-animation'); target.focus(); window.scrollTo({top:0,behavior:'smooth'}); }
-        // close on mobile
-        if(window.innerWidth < 760) menu.classList.remove('active');
+        openSection(id);
       });
+    });
+
+    // Footer links: they also have data-section attribute, so the above handles them
+
+    // Make clickable cards with data-section open the appropriate section
+    document.querySelectorAll('.card[data-section]').forEach(card=>{
+      card.addEventListener('click', ()=> openSection(card.dataset.section));
+      card.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') openSection(card.dataset.section); });
     });
 
     // --- Cookie Banner logic ---
@@ -331,15 +355,16 @@
       const consent = document.getElementById('consent').checked;
       if(!name || !email || !message || !consent){ alert('Bitte fülle alle Pflichtfelder aus und stimme zu.'); return; }
 
-      // Beispiel: wenn kein Backend vorhanden, öffnen wir Mail-Client als Fallback
+      // Sauberer mailto-Fallback: Zeilenumbrüche mit 
+
       const subject = encodeURIComponent('Kontaktformular: ' + name);
-      const body = encodeURIComponent('Name: '+name+'
-E-Mail: '+email+'
+      const bodyRaw = `Name: ${name}
+E-Mail: ${email}
 
-'+message);
-      window.location.href = `mailto:kontakt@beispiel.de?subject=${subject}&body=${body}`;
-
-      // Hinweis: Für echte Kundenprojekte empfehlen wir ein serverseitiges Ende oder Dienste wie Formspree / Netlify Forms.
+${message}`;
+      const body = encodeURIComponent(bodyRaw);
+      // öffnet Mailclient; alternativ kannst du ein Backend/Formservice verwenden
+      window.location.href = `mailto:kontakt@toshiweb.de?subject=${subject}&body=${body}`;
     });
 
     // --- Accessibility: allow keyboard navigation for details ---
@@ -347,6 +372,15 @@ E-Mail: '+email+'
 
     // --- Small enhancement: close mobile menu when resizing to desktop ---
     window.addEventListener('resize', ()=>{ if(window.innerWidth >= 760) menu.classList.remove('active'); });
+
+    // Optional: if user lands with hash like #kontakt, open that section
+    (function openHashSection(){
+      const hash = window.location.hash.replace('#','');
+      if(hash){
+        const el = document.getElementById(hash);
+        if(el) openSection(hash);
+      }
+    })();
 
   </script>
 </body>
