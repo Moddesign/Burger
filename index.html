@@ -1,79 +1,246 @@
-<style>
-  /* Basis: body bleibt dunkel mit globalem Overlay */
-  body {
-    margin:0;
-    font-family: Inter, system-ui, Arial, sans-serif;
-    color: #fff;
-    min-height:100vh;
-    background:#111;
-  }
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>toshiweb — Vollflächig</title>
+  <meta name="theme-color" content="#764ba2" />
+  <meta name="description" content="Modernes Webdesign, Entwicklung, Referenzen, Blog, Impressum und Datenschutz. Mobilfreundlich und barrierearm." />
+  <style>
+    :root{
+      --bg1:#667eea; --bg2:#764ba2; --accent:#ffdd57; --card-bg:rgba(0,0,0,0.45); --glass: rgba(255,255,255,0.04);
+      --gap:20px; --radius:12px; --content-padding:28px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family: Inter, Arial, "Helvetica Neue", sans-serif; color: white; -webkit-font-smoothing:antialiased;}
+    body { background:#111; }
 
-  main section {
-    min-height:100vh; /* jede Sektion füllt Viewport */
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:40px 24px;
-    text-align:center;
-    transition: background 0.5s ease;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    position:relative;
-    color:white;
-  }
+    /* Navbar */
+    header.navbar{width:100%;position:sticky;top:0; z-index:1000;}
+    .navbar { background-color: rgba(0, 0, 0, 0.45); backdrop-filter: blur(6px); overflow: hidden; position: relative; }
+    .brand{display:flex;align-items:center;gap:12px;padding:14px 0}
+    .brand h1{font-size:1.05rem;margin:0}
+    .navbar .menu { display: none; background-color: transparent; }
+    .navbar .menu a { color: white; text-decoration: none; display: block; padding: 12px 14px; font-weight:600; }
+    .burger { cursor: pointer; display: block; position: absolute; top: 12px; right: 20px; width: 34px; height: 26px; z-index: 1100; }
+    .burger div { background-color: white; height: 4px; margin: 4px 0; border-radius:3px; transition: transform 0.25s ease; }
+    .menu.active{display:block}
+    @media (min-width: 760px){
+      .burger{display:none}
+      .navbar .menu{display:flex;gap:12px;justify-content:flex-end;align-items:center}
+      .navbar .menu a{padding:14px 16px}
+    }
 
-  main section::before {
-    content:"";
-    position:absolute;
-    top:0;left:0;right:0;bottom:0;
-    background:rgba(0,0,0,0.4); /* dunkle Overlay, für Lesbarkeit */
-    z-index:0;
-  }
+    /* Sections full viewport */
+    main { width:100%; margin:0; padding:0; }
+    main section {
+      min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:40px 24px; text-align:center; transition: background 0.5s ease; background-size:cover; background-position:center; background-repeat:no-repeat; position:relative; color:white;
+    }
+    main section::before { content:""; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:0; }
+    main section > * { position:relative; z-index:1; }
+    section:not(.active){display:none;}
 
-  main section > * { position:relative; z-index:1; }
+    /* Background images per section */
+    #startseite { background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=2000'); }
+    #ueber-uns { background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=2000'); }
+    #leistungen { background-image: url('https://images.unsplash.com/photo-1521790797524-b2497295b8a6?w=2000'); }
+    #referenzen { background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=2000'); }
+    #blog { background-image: url('https://images.unsplash.com/photo-1508780709619-79562169bc64?w=2000'); }
+    #faq { background-image: url('https://images.unsplash.com/photo-1497493292307-31c376b6e479?w=2000'); }
+    #kontakt { background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=2000'); }
+    #impressum { background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=2000'); }
+    #datenschutz { background-image: url('https://images.unsplash.com/photo-1508780709619-79562169bc64?w=2000'); }
+    #agb { background-image: url('https://images.unsplash.com/photo-1485217988980-11786ced9454?w=2000'); }
 
-  /* Beispiel: Hintergrundbilder für jede Sektion */
-  #startseite { background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=2000'); }
-  #ueber-uns { background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=2000'); }
-  #leistungen { background-image: url('https://images.unsplash.com/photo-1521790797524-b2497295b8a6?w=2000'); }
-  #referenzen { background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=2000'); }
-  #blog { background-image: url('https://images.unsplash.com/photo-1508780709619-79562169bc64?w=2000'); }
-  #faq { background-image: url('https://images.unsplash.com/photo-1497493292307-31c376b6e479?w=2000'); }
-  #ressourcen { background-image: url('https://images.unsplash.com/photo-1485217988980-11786ced9454?w=2000'); }
-  #karriere { background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=2000'); }
-  #kontakt { background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=2000'); }
-  #impressum { background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=2000'); }
-  #datenschutz { background-image: url('https://images.unsplash.com/photo-1508780709619-79562169bc64?w=2000'); }
-  #agb { background-image: url('https://images.unsplash.com/photo-1485217988980-11786ced9454?w=2000'); }
+    h2 { font-size:2rem; margin-bottom:20px; border-bottom:2px solid rgba(255,255,255,0.2); padding-bottom:6px; }
+    p { max-width:900px; margin:0 auto 16px auto; line-height:1.6; }
+    .btn { margin-top:12px; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; background: var(--accent); color:#111; transition:0.3s; }
+    .btn:hover { background:#ffea57; }
 
-  /* Text Styling */
-  h2 { font-size:2rem; margin-bottom:20px; }
-  p { max-width:800px; margin:0 auto 16px auto; line-height:1.6; }
-  .btn { margin-top:12px; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; background: #ffdd57; color:#111; transition:0.3s; }
-  .btn:hover { background:#ffc700; }
+    /* grid cards */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:20px}
+    .card{background:rgba(255,255,255,0.05);padding:16px;border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1); cursor:pointer}
+    .muted{opacity:0.85;font-size:0.95rem}
 
-</style>
+    /* form */
+    input, textarea{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:white;width:100%}
+    input::placeholder, textarea::placeholder{color:rgba(255,255,255,0.6)}
+    button.primary{background:white;color:var(--accent);padding:10px 16px;border-radius:8px;border:none;font-weight:700;cursor:pointer}
 
-<script>
-  // Buttons öffnen Sektionen
-  const links = document.querySelectorAll('a[data-section]');
-  links.forEach(link=>{
-    link.addEventListener('click', e=>{
-      e.preventDefault();
-      const id = link.dataset.section;
-      document.querySelectorAll('main section').forEach(sec=>{
-        sec.style.display='none';
-      });
+    footer{margin-top:18px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;color:rgba(255,255,255,0.7);}
+  </style>
+</head>
+<body>
+  <header class="navbar" role="banner">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div class="brand">
+          <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--bg1),var(--bg2));display:flex;align-items:center;justify-content:center;font-weight:800;color:white">T</div>
+          <h1>toshiweb</h1>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <nav class="menu" id="menu" role="navigation" aria-label="Hauptnavigation">
+            <a href="#" data-section="startseite">Startseite</a>
+            <a href="#" data-section="ueber-uns">Über Uns</a>
+            <a href="#" data-section="leistungen">Leistungen</a>
+            <a href="#" data-section="referenzen">Referenzen</a>
+            <a href="#" data-section="blog">Blog</a>
+            <a href="#" data-section="faq">FAQ</a>
+            <a href="#" data-section="kontakt">Kontakt</a>
+            <a href="#" data-section="impressum">Impressum</a>
+            <a href="#" data-section="datenschutz">Datenschutz</a>
+            <a href="#" data-section="agb">AGB</a>
+          </nav>
+          <div id="burger" class="burger" aria-label="Menü öffnen" role="button" tabindex="0">
+            <div></div><div></div><div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main role="main" aria-live="polite">
+    <!-- Startseite -->
+    <section id="startseite" class="active" tabindex="0">
+      <h2>Willkommen bei toshiweb</h2>
+      <p>toshiweb unterstützt Unternehmen, online sichtbar zu werden. Moderne, schnelle und mobilfreundliche Websites, die Ihre Kunden begeistern.</p>
+      <a href="#" data-section="kontakt" class="btn">Jetzt Projekt starten</a>
+      <div class="grid">
+        <div class="card" data-section="leistungen"><h3>Webentwicklung</h3><p class="muted">Individuell, performant, wartbar. Moderne Frameworks, saubere Struktur.</p></div>
+        <div class="card" data-section="ueber-uns"><h3>Responsive Design</h3><p class="muted">Optimiert für Desktop, Tablet, Smartphone. Nutzerfreundlich und barrierearm.</p></div>
+        <div class="card" data-section="referenzen"><h3>SEO & Support</h3><p class="muted">Suchmaschinenoptimierung, Content-Strategie und laufender Support.</p></div>
+      </div>
+    </section>
+
+    <!-- Über Uns -->
+    <section id="ueber-uns" tabindex="0">
+      <h2>Über toshiweb</h2>
+      <p>toshiweb besteht aus einem erfahrenen Team für Webentwicklung, Design und Marketing. Wir setzen auf Qualität, Nachhaltigkeit und Transparenz.</p>
+      <div class="grid">
+        <div class="card"><h3>Unser Prozess</h3><p class="muted">Analyse → Prototyp → Entwicklung → Test → Launch → Wartung</p></div>
+        <div class="card"><h3>Team</h3><p class="muted">Max Mustermann (Projektleitung), Anna Beispiel (Design), Jonas Dev (Entwicklung)</p></div>
+      </div>
+    </section>
+
+    <!-- Leistungen -->
+    <section id="leistungen" tabindex="0">
+      <h2>Unsere Leistungen</h2>
+      <ul>
+        <li>Individuelle Webentwicklung von Microsites bis Webapps</li>
+        <li>Responsive & Mobile-First Design</li>
+        <li>SEO & Content-Strategie</li>
+        <li>Wartung & Hosting</li>
+        <li>DSGVO-konforme Beratung</li>
+      </ul>
+    </section>
+
+    <!-- Referenzen -->
+    <section id="referenzen" tabindex="0">
+      <h2>Referenzen</h2>
+      <div class="grid">
+        <div class="card"><strong>Projekt A — Shopboost</strong><p class="muted">E-Commerce: +35% Conversion</p></div>
+        <div class="card"><strong>Projekt B — Corporate One</strong><p class="muted">Corporate Website mit CMS</p></div>
+        <div class="card"><strong>Projekt C — Local Service</strong><p class="muted">Lead-Generation Landingpage</p></div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <section id="blog" tabindex="0">
+      <h2>Blog & Insights</h2>
+      <div class="grid">
+        <div class="card"><strong>SEO richtig planen</strong><p class="muted">Keyword-Recherche, technische Checks, Content-Plan</p></div>
+        <div class="card"><strong>Mobile-first Design</strong><p class="muted">Layouts, Performance, Interaktion für mobile Nutzer</p></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" tabindex="0">
+      <h2>FAQ</h2>
+      <details class="card"><summary>Wie lange dauert ein Projekt?</summary><p class="muted">Von 2–12 Wochen abhängig vom Umfang.</p></details>
+      <details class="card"><summary>Was kostet eine Website?</summary><p class="muted">Preise ab 2.500€, individuelles Angebot nach Briefing.</p></details>
+      <details class="card"><summary>Wie sicher ist die Website?</summary><p class="muted">HTTPS, CSP, Updates, Wartung inklusive Monitoring.</p></details>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt" tabindex="0">
+      <h2>Kontakt</h2>
+      <p>Fragen oder Projektanfrage? Formular ausfüllen oder mailen: <a href="mailto:kontakt@toshiweb.de">kontakt@toshiweb.de</a></p>
+      <form id="contactForm">
+        <label>Name</label><input id="name" required placeholder="Dein Name">
+        <label>E-Mail</label><input id="email" type="email" required placeholder="name@toshiweb.de">
+        <label>Nachricht</label><textarea id="message" rows="6" required placeholder="Worum geht es?"></textarea>
+        <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+          <div style="display:flex;gap:8px;align-items:center"><input id="consent" type="checkbox" required><label for="consent">Ich stimme zu.</label></div>
+          <div><button type="submit" class="primary">Nachricht senden</button></div>
+        </div>
+        <p class="muted" style="margin-top:6px;">Hinweis: Beispiel ohne Backend.</p>
+      </form>
+    </section>
+
+    <!-- Impressum -->
+    <section id="impressum" tabindex="0">
+      <h2>Impressum</h2>
+      <p><strong>toshiweb</strong><br>Inhaber: Max Mustermann<br>Musterstr. 1, 12345 Musterstadt<br>Tel: +49 123 4567890<br>Email: kontakt@toshiweb.de</p>
+    </section>
+
+    <!-- Datenschutz -->
+    <section id="datenschutz" tabindex="0">
+      <h2>Datenschutzerklärung</h2>
+      <p>Wir nehmen Datenschutz ernst. Erhobene Daten werden nur zur Bearbeitung von Anfragen genutzt.</p>
+    </section>
+
+    <!-- AGB -->
+    <section id="agb" tabindex="0">
+      <h2>AGB</h2>
+      <p>Regeln zur Zusammenarbeit zwischen toshiweb und Auftraggeber. Leistung, Vergütung, Haftung etc.</p>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> toshiweb</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a href="#" data-section="impressum">Impressum</a>
+        <a href="#" data-section="datenschutz">Datenschutz</a>
+        <a href="#" data-section="agb">AGB</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('menu');
+    const links = menu.querySelectorAll('a');
+    const sections = document.querySelectorAll('main section');
+
+    burger.addEventListener('click', ()=> menu.classList.toggle('active'));
+    burger.addEventListener('keydown', e=> { if(e.key==='Enter'||e.key===' ') menu.classList.toggle('active'); });
+
+    function openSection(id){
+      sections.forEach(s=> s.classList.remove('active'));
       const target = document.getElementById(id);
-      if(target) target.style.display='flex';
-      window.scrollTo({top:0, behavior:'smooth'});
-    });
-  });
+      if(target){ target.classList.add('active'); target.focus({preventScroll:true}); window.scrollTo({top:0, behavior:'smooth'}); }
+      if(window.innerWidth<760) menu.classList.remove('active');
+    }
 
-  // Initial alle Sektionen außer Startseite verstecken
-  document.querySelectorAll('main section').forEach(sec=>{
-    if(sec.id!=='startseite') sec.style.display='none';
-  });
-</script>
+    links.forEach(link=> link.addEventListener('click', e=>{ e.preventDefault(); openSection(link.dataset.section); }));
+    document.querySelectorAll('.card[data-section]').forEach(card=>{ 
+      card.addEventListener('click', ()=> openSection(card.dataset.section));
+      card.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' ') openSection(card.dataset.section); });
+    });
+
+    // Kontaktformular mailto fallback
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', e=>{
+      e.preventDefault();
+      const name=document.getElementById('name').value.trim();
+      const email=document.getElementById('email').value.trim();
+      const message=document.getElementById('message').value.trim();
+      const consent=document.getElementById('consent').checked;
+      if(!name || !email || !message || !consent){ alert('Bitte fülle alle Pflichtfelder aus.'); return; }
+      const subject = encodeURIComponent('Kontaktformular: '+name);
+      const body = encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n\n${message}`);
+      window.location.href = `mailto:kontakt@toshiweb.de?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
